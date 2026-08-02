@@ -1,0 +1,19 @@
+story_id: e06s01
+title: Generate an evidence-backed cited AI draft
+status: backlog
+bcps: 5
+risk: P0
+security: high
+tasks:
+  - id: e06s01t01
+    description: Add failing graph and provider checks for evidence snapshots, typed claims, exact citation identifiers, conflicts, no-answer, and failures.
+    verify: "make test"
+    status: backlog
+  - id: e06s01t02
+    description: Deliver an explicit synchronous LangGraph drafting run that creates one immutable unapproved revision.
+    verify: "make test"
+    status: backlog
+  - id: e06s01t03
+    description: Prove unsupported claims and ineligible citations cannot become a draft and every non-success outcome remains reviewer-visible.
+    verify: "make preflight"
+    status: backlog

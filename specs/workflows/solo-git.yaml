@@ -1,0 +1,88 @@
+name: solo-git
+command: /solo-git
+description: >-
+  Deliver one approved story through an isolated worktree, TDD, evaluation,
+  verification, audit, Conventional Commit preparation, and guarded local
+  squash landing without mandatory pull-request ceremony.
+
+skills:
+  - survey-context
+  - kickoff-branch
+  - develop-tdd
+  - enforce-first
+  - run-evals
+  - verify-work
+  - audit-code
+  - commit-message
+  - release-branch
+
+args:
+  kickoff-branch:
+    workflow_mode: solo-git
+    require_clean_main: true
+    require_green_preflight: true
+  develop-tdd:
+    story_source: specs/state.yaml
+    method: red-green-refactor
+  run-evals:
+    use_active_story_release_gate: true
+  verify-work:
+    require_human_uat: true
+  release-branch:
+    mode: solo-local
+    land_command: bash scripts/land-branch.sh <branch> "<conventional-message>"
+    pull_request: optional
+
+gates:
+  - after: survey-context
+    require:
+      - active story has approved specifications
+      - every active task has a runnable verify command
+      - handoff and Git state agree
+  - after: kickoff-branch
+    require:
+      - work runs outside main in a dedicated worktree
+      - baseline Preflight passes
+  - after: develop-tdd
+    require:
+      - each behavior passed a red-green-refactor cycle
+      - relevant tests pass
+  - after: enforce-first
+    require:
+      - changed tests satisfy F.I.R.S.T. quality rules
+  - after: run-evals
+    require:
+      - applicable release-gate evaluations pass
+      - paid-provider evaluations remain explicit and budgeted
+  - after: verify-work
+    require:
+      - Preflight passes
+      - manual UAT receives explicit human confirmation
+  - after: audit-code
+    require:
+      - convention, type, test, and scope audits pass
+  - after: commit-message
+    require:
+      - proposed squash message follows Conventional Commits
+      - semantic version effect is stated
+  - after: release-branch
+    require:
+      - release gates pass before landing
+      - land-branch.sh performs the guarded local squash
+      - primary worktree ends on main
+      - feature worktree is removed
+
+terminal_states:
+  - success
+  - no-op
+  - blocked
+  - exhausted
+
+verify: >-
+  python3 -c "from pathlib import Path; import yaml;
+  recipe=yaml.safe_load(Path('specs/workflows/solo-git.yaml').read_text());
+  state=yaml.safe_load(Path('specs/state.yaml').read_text());
+  assert recipe['skills'][0]=='survey-context';
+  assert recipe['skills'][-1]=='release-branch';
+  assert recipe['args']['release-branch']['mode']=='solo-local';
+  assert state['workflow_mode']=='solo-git'"

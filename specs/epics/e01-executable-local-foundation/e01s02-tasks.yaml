@@ -1,0 +1,65 @@
+story_id: e01s02
+spec: e01s02-use-attributable-local-roles.md
+title: Use attributable local roles
+status: failing
+bcps: 3
+risk: P0
+security: high
+tasks:
+  - id: e01s02t01
+    description: Add SQLAlchemy mappings, Alembic migration checks, deterministic fictional actor-role-permission seeds, and confirm no new security findings in affected paths.
+    verify: "make test"
+    risk: P0
+    security: high
+    status: failing
+    allure:
+      severity: critical
+      categories:
+        - Identity
+        - Migration
+        - Security Review
+  - id: e01s02t02
+    description: Add development actor-list, selection, current-session, sign-out, cookie, expiry, environment, and Origin checks, and confirm no new security findings in affected paths.
+    verify: "make test"
+    risk: P0
+    security: high
+    status: failing
+    allure:
+      severity: critical
+      categories:
+        - Authentication
+        - Security Review
+  - id: e01s02t03
+    description: Add the server-owned Principal and permission dependency with forged-claim, Administrator-denial, and multi-role tests, and confirm no new security findings in affected paths.
+    verify: "make test"
+    risk: P0
+    security: high
+    status: failing
+    allure:
+      severity: critical
+      categories:
+        - Authorization
+        - Security Review
+  - id: e01s02t04
+    description: Add the same-origin actor interface, identity banner, denied state, expiry recovery, sign-out, and accessibility checks, and confirm no new security findings in affected paths.
+    verify: "make test"
+    risk: P0
+    security: medium
+    status: failing
+    allure:
+      severity: critical
+      categories:
+        - Browser
+        - Accessibility
+        - Security Review
+  - id: e01s02t05
+    description: Add structured auth logging, production-disable, secret-leak, cookie-leak, migration, and e01 regression gates, and confirm no new security findings in affected paths.
+    verify: "make preflight"
+    risk: P0
+    security: high
+    status: failing
+    allure:
+      severity: critical
+      categories:
+        - Preflight
+        - Security Review

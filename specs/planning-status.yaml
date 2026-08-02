@@ -1,0 +1,10 @@
+phase: discover
+steps:
+  survey_context: complete
+  elaborate_spec: complete
+  seed_conventions: complete
+  compose_workflow: complete
+  grill_with_docs: complete
+  scope_work: complete
+  slice_tasks: complete
+  plan_work: complete

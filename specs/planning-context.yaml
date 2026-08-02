@@ -1,0 +1,179 @@
+# specs/planning-context.yaml
+# Written by elaborate-spec; consumed by scope-work and slice-tasks.
+
+feature_name: medinfo-ops-agent
+
+problem_statement: >-
+  A fictional mid-sized European life-sciences company handles approximately 200
+  fragmented medical-information requests per business day. Coordinators and
+  trained reviewers spend substantial time manually extracting case details,
+  identifying safety and quality signals, searching disconnected evidence
+  sources, drafting responses, and reconstructing decision history. The
+  highest-risk failure is missing a potential adverse-event or product-quality
+  escalation. The product must accelerate first-pass triage and evidence
+  assembly without replacing qualified reviewers or weakening privacy,
+  traceability, evidence eligibility, or human approval.
+
+constraints:
+  - All operational cases, products, approved content, workflow-eligible studies, recipients, and canonical actors must be explicitly fictional and synthetic.
+  - Real recruiter or interviewer identities may authenticate only through individually provisioned accounts in later deployed releases.
+  - The application must not claim clinical validation, regulatory validation, compliance, or suitability for real medical-information operations.
+  - The representative workload is 150-250 requests per business day, with a design target of 500, peaks of 60 requests per hour, approximately 15 concurrent reviewers, and approximately 10 concurrent AI jobs.
+  - Normal case and UI operations should complete in under 1 second where practical; internal retrieval under 3 seconds; initial triage under 15 seconds; and an evidence-backed draft normally under 60 seconds.
+  - English is the only automated processing language. Non-English, mixed-language, and low-confidence language detections require manual handling.
+  - The immutable original request must be preserved inside the secured application boundary.
+  - Only a versioned, minimized, sanitized representation may reach models, embeddings, MCP tools, public connectors, ordinary logs, traces, or analytics.
+  - Sanitization must fail closed, preserve critical clinical facts, and link every downstream operation to the exact sanitized revision used.
+  - Target-v1.0 privacy gates include at least 99% free-text direct-identifier recall, 100% structured-field removal, zero critical misses, zero seeded boundary leakage, at least 95% clinical-fact retention, 100% critical-fact retention, no more than 5% unnecessary redaction, and 100% model/tool allowlist compliance.
+  - Triage must represent independent findings for medical-information inquiry, potential adverse event, potential product-quality complaint, special situation, privacy concern, and out-of-scope content.
+  - Positive or uncertain safety findings require exact evidence spans and may create multiple independent operational obligations.
+  - Deterministic safety findings cannot be suppressed by lower-confidence model output, and reviewer overrides must remain visible and justified.
+  - Target-v1.0 triage gates include at least 95% adverse-event recall, product-quality-complaint recall, and combined safety-routing recall; zero misses in the critical subset; at least 70% safety-routing precision; and no more than 15% false escalation on clearly negative cases.
+  - Current eligible approved fictional content is authoritative. Synthetic public evidence is supplementary, conditional, and reviewer-visible.
+  - Expired, superseded, draft, withdrawn, wrong-product, wrong-language, or wrong-jurisdiction content cannot support automatic drafting.
+  - Material evidence conflicts must block the affected claim and require specialist disposition. Insufficient evidence must produce a no-answer or manual-review outcome rather than model improvisation.
+  - Target-v1.0 product and retrieval gates include at least 95% unambiguous product accuracy per product, 100% manual routing for designated ambiguous or unknown cases, at least 90% approved-passage recall@5 per product, at least 95% correct no-answer behavior, 100% current-version selection, and zero wrong-product or ineligible automatic use.
+  - Target-v1.0 grounding gates include 100% factual-claim citation coverage, at least 95% overall claim-support precision, at least 98% product-specific claim-support precision, no more than 2% unsupported claims overall, zero unsupported critical claims, zero fabricated or ineligible citations, 100% evidence-tier compliance, at least 95% conflict routing, and at least 95% correct no-answer behavior.
+  - Evaluation datasets must be versioned, frozen, manually reviewed, separated from development examples, reproducible, slice-reported, and explicit about sample size and limited generalizability.
+  - Permission-based RBAC must be enforced in the backend using roles as permission bundles rather than as the only source of workflow rules.
+  - The target role model is Coordinator, Reviewer, Approver, Auditor, and Administrator, with multi-role users permitted but unable to bypass historical authorship checks.
+  - Approval applies to one immutable draft revision. An author or material editor cannot approve that revision, and a material post-approval change creates a new unapproved revision.
+  - Administrator access does not automatically grant case review, approval, release, or protected-original access.
+  - Approval and release are separate explicit human actions. Models cannot approve, release, choose arbitrary destinations, or represent attempted delivery as confirmed delivery.
+  - Delivery uses an idempotent simulated outbound adapter and separate test receiver. A case is delivered only after receiver confirmation.
+  - Pharmacovigilance and quality teams remain external; the application creates immutable, auditable escalation packages through simulated adapters and tracks delivery independently.
+  - AI, embedding, public-connector, observability, or budget failure must not disable manual sanitization review, manual triage, lexical approved-content retrieval, manual cited drafting, escalation, approval, release, or audit access.
+  - Automated checks that did not run must be recorded as not_run rather than passed.
+  - Long-running target-v1.0 AI, indexing, cleanup, and delivery operations require asynchronous execution, idempotency, resumability, bounded retries, stale-work protection, and visible failure recovery.
+  - v0.2 AI runs are synchronous, explicitly initiated, bounded, checkpointed, and manually retryable; v0.2 must not claim durable asynchronous execution.
+  - Locked technologies are Next.js, React, TypeScript, FastAPI, Python, Pydantic, LangGraph, FastMCP, PostgreSQL, pgvector, pytest, and Playwright.
+  - The validated v0.2 baseline uses Python 3.14.6, Node.js 24.18.1 LTS, Next.js 16 App Router, standalone FastMCP 3.4.5, PostgreSQL 18, and pgvector 0.8.6.
+  - Exact Python and Node.js dependency resolutions must be committed in lock files; prerelease and canary dependencies are excluded unless approved by a later decision.
+  - A day-zero install, import, database, checkpoint, and MCP smoke test must pass on Python 3.14.6 before feature implementation depends on the validated baseline.
+  - Deployment topology, later-release worker and queue technology, Azure service, OIDC provider, observability backend, object storage, cache, secrets manager, and detailed CI/CD design remain architecture decisions.
+  - Prefer a modular monolith, one primary relational database, and only the independently deployed processes justified by trust or execution boundaries.
+  - The v0.2 provider target is direct OpenAI Responses API access through replaceable model and embedding adapters; official documentation confirms the selected model names and Structured Outputs support, but project access, credentials, and billing remain unverified prerequisites.
+  - Every v0.2 Responses API request must set store to false and must not use Conversations or background mode.
+  - Standard OpenAI abuse-monitoring retention of up to 30 days is accepted only for minimized, sanitized, synthetic content and must be disclosed.
+  - GPT-5.6 Luna is the default v0.2 text model. GPT-5.6 Terra requires explicit configuration for a bounded evaluation or manually initiated escalation and must never be a silent fallback.
+  - GPT-5.6 Luna and Terra are mutable aliases. Evaluation artifacts must record the requested alias, returned model identifier, inputs, outputs, configuration, and timestamps, and the project must not claim exact provider reproducibility.
+  - Model responses must use simple strict Structured Outputs schemas with additional properties disabled. Refusal, incomplete output, timeout, and parse failure are typed non-success outcomes with at most one bounded retry before manual handling.
+  - text-embedding-3-small uses 1,536 dimensions. Each immutable embedding revision must record the model alias, dimensions, source-content hash, sanitizer version, and creation time.
+  - A paid-provider smoke test must pass by 3 August 2026; otherwise development continues with deterministic adapters and v0.2 cannot be represented as real-provider complete.
+  - The maximum real-provider development allowance through v0.2 is USD 30. Ordinary tests must use deterministic fake providers and make no paid calls.
+  - Target-v1.0 runtime budgets must be enforced transactionally before provider invocation and must pause only AI assistance, not the manual workflow.
+  - "The development workflow uses the bigpowers solo-local Git profile: feature worktrees, protected main, verification gates, Conventional Commits, and release-branch through land-branch.sh without mandatory PRs."
+  - Internal v0.1 is due 7 August 2026; recruiter-demonstrable v0.2 is due 16 August 2026; the combined planning budget is approximately 70 focused solo-development hours.
+  - Every tagged release must state what works, what is deferred, current measured results, known limitations, and the applicable release gate.
+
+out_of_scope:
+  - Real patient, reporter, healthcare-professional, employee, customer, company-case, or pharmaceutical-product data.
+  - Diagnosis, treatment recommendations, individualized medical advice, causality assessment, or final pharmacovigilance or quality determinations.
+  - Autonomous response approval, escalation suppression, delivery, or external-destination selection.
+  - Real mailbox, CRM, pharmacovigilance, quality-system, contact-center, or email integrations.
+  - Broad multilingual processing or silent authoritative translation.
+  - Real public evidence influencing fictional operational cases, drafts, approvals, releases, or evaluation scores.
+  - Arbitrary web search as an evidence source.
+  - OCR, scanned or image-only PDF processing, image understanding, handwriting recognition, arbitrary document parsing, office-document ingestion, or complex layout reconstruction.
+  - Full regulated document management, formal medical or legal content approval, electronic signatures, collaborative redlining, or quality-management-system claims.
+  - Formal anonymization, clinical-grade, GDPR, HIPAA, GxP, FDA, or other compliance claims.
+  - Internet-scale traffic, Kubernetes, Kafka, distributed microservices, or multiple databases without a demonstrated need.
+  - Public cloud deployment, OIDC, anonymous operational access, attachments, content-lifecycle administration, live public connectors, Terraform, and full target-v1.0 benchmark suites before v0.2.
+  - Anonymous ephemeral multi-role sandboxes in the target v1.0 unless promoted from stretch scope through a later change request.
+
+key_decisions:
+  - decision: Design for trained medical-information reviewers at a fictional organization; recruiters are observers and evaluators rather than the product's primary users.
+    rationale: Product realism and human-review discipline provide stronger evidence than a recruiter-first mock workflow.
+
+  - decision: Treat this specification as the target v1.0 reference application delivered through phased releases.
+    rationale: The complete scope is too large for one credible solo MVP; progressive hardening creates useful, honest demonstrations sooner.
+
+  - decision: Deliver v0.1 as an internal manual vertical slice by 7 August 2026.
+    rationale: Establish the domain model, privacy boundary, evidence eligibility, authorization, approval, delivery, and audit invariants before introducing model behavior.
+
+  - decision: Deliver v0.2 as the first recruiter-demonstrable AI-assisted release by 16 August 2026 within a 70-hour combined budget.
+    rationale: Recruiters for an AI-native role need to see a real model-assisted workflow, LangGraph, MCP, retrieval, citations, evaluation evidence, and human control.
+
+  - decision: Limit v0.2 to one deeply developed fictional product, text-only synthetic intake, repository-managed content, local development authentication, and focused evaluation suites.
+    rationale: Preserve a complete and polished vertical slice while deferring later operational breadth.
+
+  - decision: Use a channel-neutral normalized intake service with an inbound synthetic web form and authenticated reviewer-created intake in the target system.
+    rationale: Demonstrate a genuine end-to-end channel while keeping medical-information business logic outside channel adapters.
+
+  - decision: Use independent multi-label triage findings and separate them from operational routing.
+    rationale: One request can contain several concurrent safety, quality, privacy, and information obligations that a mutually exclusive label would hide.
+
+  - decision: Use a two-representation case model with immutable original intake and versioned sanitized working text.
+    rationale: Enforce privacy through adapters and data boundaries rather than prompt instructions while preserving reviewer correction and provenance.
+
+  - decision: Build the target corpus around three distinct fictional products and approximately 35-50 carefully reviewed approved-content items, expanding from one product after v0.2.
+    rationale: Three products meaningfully exercise aliases, ambiguity, product isolation, version selection, retrieval, and evaluation without making content creation dominate the first release.
+
+  - decision: Use controlled supplementation with approved content as authoritative and synthetic public evidence as conditional Tier 2 or Tier 3 support.
+    rationale: Preserve the distinction between approved product information, publications, and trial registries while still demonstrating evidence orchestration.
+
+  - decision: Separate synthetic workflow evidence from live PubMed and ClinicalTrials.gov demonstrations.
+    rationale: Real records cannot consistently support fictional products, and changing live results would make operational evaluations irreproducible.
+
+  - decision: Use application-controlled claim and citation identifiers with exact passage provenance.
+    rationale: Free-form model citations cannot provide reliable eligibility, version, product, or support guarantees.
+
+  - decision: Keep approval revision-specific and release independently human-controlled.
+    rationale: Prevent self-approval and post-approval mutation while ensuring neither a model nor approval alone triggers an external action.
+
+  - decision: Preserve a complete manual fallback whenever optional AI capabilities are unavailable or budget-blocked.
+    rationale: The application is a medical-information workflow accelerated by AI, not an AI service whose outage stops safety-relevant work.
+
+  - decision: Implement repository-managed baseline content first and add a controlled content-lifecycle UI in a later operational release.
+    rationale: Reproducible fixtures and evaluations are required early; lifecycle administration adds enterprise value after the core workflow is stable.
+
+  - decision: Defer limited synthetic text and text-based PDF attachments until after v0.2.
+    rationale: Local extraction, sanitization, provenance, and failure handling are valuable, but OCR and attachment work must not displace the central workflow deadline.
+
+  - decision: Provide public read-only portfolio views and individually provisioned OIDC access in later deployed releases.
+    rationale: Recruiters can inspect the project without shared credentials while state-changing actions remain attributable to unique identities.
+
+  - decision: Use default later-release retention periods of 24 hours for anonymous submissions, 30 days for recruiter demo cases, 72 hours for external identity access, and 90 days for minimized temporary audit metadata.
+    rationale: Separate case deletion, access expiry, and minimized accountability while removing temporary derived data promptly.
+
+  - decision: Use direct OpenAI access for v0.2 through provider-neutral interfaces, with deterministic fake providers as the ordinary test default.
+    rationale: Direct access is faster for the deadline, while abstraction preserves later Azure portability and keeps development reproducible without paid credentials.
+
+  - decision: Use OpenAI Responses with store disabled, no Conversations, and no background mode for v0.2.
+    rationale: Minimize provider-side application state while disclosing the standard abuse-monitoring retention that still applies to sanitized synthetic content.
+
+  - decision: Use GPT-5.6 Luna by default and require explicit configuration for any bounded GPT-5.6 Terra use.
+    rationale: Prevent a silent tenfold unit-price increase while retaining a deliberate capability-escalation path.
+
+  - decision: Treat OpenAI model aliases as mutable and preserve complete real-provider evaluation artifacts.
+    rationale: The selected model pages do not list dated snapshots, so exact provider reproducibility cannot be promised.
+
+  - decision: Use simple strict Structured Outputs and model every refusal, incomplete result, timeout, and parse failure as a typed non-success outcome.
+    rationale: Schema adherence does not remove provider failure modes, and manual handling must remain available after one bounded retry.
+
+  - decision: Use PostgreSQL-backed LangGraph checkpoints for reviewer feedback interrupts only, with replay-safe nodes and stable thread identifiers.
+    rationale: Demonstrate durable human-in-the-loop revision while keeping approval and release in separately authorized backend domain commands.
+
+  - decision: Treat LangGraph checkpoints as non-authoritative execution state in a separate schema.
+    rationale: Immutable domain revisions, approvals, releases, evidence snapshots, and audit events require domain-owned records and idempotent commands.
+
+  - decision: Pin standalone FastMCP 3.4.5 and use in-memory transport for the local v0.2 release.
+    rationale: Use the stable FastMCP line and real typed MCP client contracts without adding subprocess, HTTP, authentication, or prerelease risk to the deadline.
+
+  - decision: Let LangGraph deterministically invoke allowlisted read-only MCP retrieval tools.
+    rationale: The model may propose a typed query, but it cannot select arbitrary tools, call counts, providers, or destinations.
+
+  - decision: Filter eligible evidence before exact vector and PostgreSQL full-text retrieval, then combine rankings with deterministic reciprocal-rank fusion.
+    rationale: The small v0.2 corpus does not justify approximate-index recall loss or HNSW tuning.
+
+  - decision: Store text-embedding-3-small vectors at the default 1,536 dimensions with immutable provenance.
+    rationale: The default fits pgvector and avoids an unmeasured dimensionality-quality trade-off.
+
+  - decision: Keep v0.2 AI execution synchronous and explicitly user-triggered.
+    rationale: Bound the first recruiter release honestly and defer a durable worker or queue until a later release has a planned execution boundary.
+
+  - decision: Use Next.js 16 stable App Router features and PostgreSQL 18 with pgvector 0.8.6.
+    rationale: Pin a documented, compatible local baseline and defer managed-provider compatibility to a deployment ADR.
+
+  - decision: Register and use the bigpowers solo-local workflow before implementation begins.
+    rationale: The project is developed by one person but still requires feature isolation, protected main, reviewable verification gates, and safe local landing.

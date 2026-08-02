@@ -1,0 +1,27 @@
+id: e03
+title: Manual Triage and Evidence
+scope_id: IS-03
+target_release: v0.1
+wsjf: 7.5
+total_bcps: 10
+status: backlog
+outcome: A reviewer can triage a synthetic case and prepare a cited response without AI.
+stories:
+  - id: e03s01
+    title: Record independent triage findings
+    value: A reviewer can record concurrent information, safety, quality, privacy, and scope findings with exact safety spans.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e02s02]
+    spec: e03s01-record-independent-triage.md
+    tasks: e03s01-tasks.yaml
+  - id: e03s02
+    title: Draft from eligible evidence or record no-answer
+    value: A reviewer can find current eligible passages and create a cited manual draft or an explicit no-answer outcome.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e02s02]
+    spec: e03s02-draft-from-eligible-evidence.md
+    tasks: e03s02-tasks.yaml

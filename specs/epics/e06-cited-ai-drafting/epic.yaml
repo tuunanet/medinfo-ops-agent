@@ -1,0 +1,27 @@
+id: e06
+title: Cited AI Drafting and Revision
+scope_id: IS-06
+target_release: v0.2
+wsjf: 5.2
+total_bcps: 10
+status: backlog
+outcome: A reviewer can obtain an evidence-backed draft, pause for review, and create a new revision without transferring approval or release authority.
+stories:
+  - id: e06s01
+    title: Generate an evidence-backed cited AI draft
+    value: A reviewer can generate a typed draft from one eligible evidence snapshot or receive an explicit conflict, no-answer, or failure outcome.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e05s01, e05s02]
+    spec: e06s01-generate-cited-ai-draft.md
+    tasks: e06s01-tasks.yaml
+  - id: e06s02
+    title: Revise a draft from reviewer feedback
+    value: A reviewer can resume a checkpointed workflow with feedback and receive a new immutable, unapproved revision.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e04s01, e06s01]
+    spec: e06s02-revise-from-reviewer-feedback.md
+    tasks: e06s02-tasks.yaml

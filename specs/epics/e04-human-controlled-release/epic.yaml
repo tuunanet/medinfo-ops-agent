@@ -1,0 +1,27 @@
+id: e04
+title: Human-Controlled Release
+scope_id: IS-04
+target_release: v0.1
+wsjf: 6.0
+total_bcps: 10
+status: backlog
+outcome: Authorized fictional actors can approve, release, confirm simulated delivery, and reconstruct the immutable decision history.
+stories:
+  - id: e04s01
+    title: Approve an immutable revision with separation of duties
+    value: An eligible approver can approve one exact revision while authors and material editors remain blocked from self-approval.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e03s02]
+    spec: e04s01-approve-immutable-revision.md
+    tasks: e04s01-tasks.yaml
+  - id: e04s02
+    title: Release and audit confirmed simulated delivery
+    value: An authorized releaser can explicitly send idempotent response and escalation packages, confirm receipt, and inspect the audit trail.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e03s01, e04s01]
+    spec: e04s02-release-and-audit-delivery.md
+    tasks: e04s02-tasks.yaml

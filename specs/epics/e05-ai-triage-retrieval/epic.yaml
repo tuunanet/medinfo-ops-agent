@@ -1,0 +1,27 @@
+id: e05
+title: AI Triage and Controlled Retrieval
+scope_id: IS-05
+target_release: v0.2
+wsjf: 5.4
+total_bcps: 10
+status: backlog
+outcome: A reviewer can request bounded AI assistance and inspect controlled, eligible evidence without weakening deterministic safety findings.
+stories:
+  - id: e05s01
+    title: Run bounded AI triage without weakening safety
+    value: A reviewer can request typed AI triage over one sanitized revision and continue manually when the provider or budget is unavailable.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e04s02]
+    spec: e05s01-run-bounded-ai-triage.md
+    tasks: e05s01-tasks.yaml
+  - id: e05s02
+    title: Retrieve eligible evidence through MCP
+    value: A reviewer can request allowlisted hybrid retrieval and inspect an immutable snapshot of eligible fictional evidence.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e03s02, e04s02]
+    spec: e05s02-retrieve-evidence-through-mcp.md
+    tasks: e05s02-tasks.yaml

@@ -1,0 +1,19 @@
+story_id: e07s02
+title: Qualify and demonstrate the real provider
+status: backlog
+bcps: 5
+risk: P1
+security: high
+tasks:
+  - id: e07s02t01
+    description: Add opt-in smoke and evaluation checks for provider access, alias recording, retention controls, redaction, token limits, and cost accounting.
+    verify: "make test"
+    status: backlog
+  - id: e07s02t02
+    description: Deliver a reproducible recruiter demonstration with bounded real-provider, performance, and evaluation evidence.
+    verify: "make test"
+    status: backlog
+  - id: e07s02t03
+    description: Prove the release disclosure states measured results, known limitations, deferred capabilities, and real-provider completion status.
+    verify: "make preflight"
+    status: backlog

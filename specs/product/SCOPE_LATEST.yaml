@@ -1,0 +1,281 @@
+status: complete
+initiative: medinfo-ops-agent
+scope_version: 1
+scoped_on: 2026-08-01
+
+core_value: >-
+  Give trained reviewers a faster, evidence-grounded first pass through fictional
+  medical-information work while preserving privacy boundaries, immutable
+  provenance, independent safety findings, and final human control.
+
+summary: >-
+  This initiative delivers one complete local vertical slice in two increments.
+  v0.1 establishes the manual workflow and its non-negotiable domain controls.
+  v0.2 adds bounded AI assistance, controlled retrieval, cited drafting,
+  human-in-the-loop revision, and focused evaluation evidence for one deeply
+  developed fictional product.
+
+  The scope favors demonstrable depth over operational breadth. It includes only
+  English text intake, fictional repository-managed evidence, local development
+  identities, simulated external destinations, and synchronous AI runs. The
+  target-v1.0 specification remains a design reference, but capabilities beyond
+  v0.2 require later scope and release decisions.
+
+release_increments:
+  - release: v0.1
+    due: 2026-08-07
+    outcome: >-
+      A runnable internal manual workflow from synthetic intake through
+      sanitization, triage, evidence use, cited drafting, approval, simulated
+      release, and audit reconstruction.
+  - release: v0.2
+    due: 2026-08-16
+    outcome: >-
+      A recruiter-demonstrable AI-assisted workflow with real provider evidence,
+      LangGraph, MCP, hybrid retrieval, citations, reviewer revision, and focused
+      evaluation results.
+
+in_scope:
+  - scope_id: IS-01
+    future_epic_id: e01
+    release: v0.1
+    capability: Executable local product foundation
+    includes:
+      - A usable reviewer interface and backend application boundary.
+      - Local attributable development identities with permission-based actions.
+      - One primary transactional store for workflow, evidence, and audit records.
+      - One deeply developed fictional product with repository-managed seed actors and content.
+    value: Establish a credible product surface and trustworthy persistence boundary for the vertical slice.
+
+  - scope_id: IS-02
+    future_epic_id: e02
+    release: v0.1
+    capability: Synthetic intake and privacy boundary
+    includes:
+      - English text intake through a synthetic web form and reviewer-created case flow.
+      - An immutable protected original and versioned minimized sanitized revisions.
+      - Fail-closed sanitization review before any downstream automated boundary.
+      - Explicit manual handling for non-English, mixed-language, and uncertain-language intake.
+    value: Prove that raw intake remains inside the secured application boundary.
+
+  - scope_id: IS-03
+    future_epic_id: e03
+    release: v0.1
+    capability: Manual triage, evidence, and cited drafting
+    includes:
+      - Independent medical-information, safety, quality, special-situation, privacy, and out-of-scope findings.
+      - Exact supporting spans for positive or uncertain safety findings.
+      - Eligibility-controlled lexical retrieval over current fictional approved content.
+      - Manual no-answer handling and cited draft creation from exact evidence passages.
+    value: Establish the complete safety-aware manual fallback before model behavior exists.
+
+  - scope_id: IS-04
+    future_epic_id: e04
+    release: v0.1
+    capability: Human authorization, release, delivery, and audit
+    includes:
+      - Immutable draft revisions with visible authorship and material-edit history.
+      - Revision-specific approval that blocks author or material-editor self-approval.
+      - A separate explicit human release action.
+      - Idempotent simulated escalation and outbound delivery with receiver confirmation.
+      - Audit reconstruction across intake, triage, evidence, revisions, approval, release, and delivery.
+    value: Demonstrate that neither AI nor approval alone can trigger or misrepresent delivery.
+
+  - scope_id: IS-05
+    future_epic_id: e05
+    release: v0.2
+    capability: Bounded AI triage and controlled evidence retrieval
+    includes:
+      - Replaceable deterministic and direct-provider model and embedding boundaries.
+      - Typed multi-label AI triage over one exact sanitized revision.
+      - Deterministic protection against suppression of safety findings.
+      - Allowlisted read-only MCP retrieval over fictional approved and supplementary synthetic evidence.
+      - Eligibility-first exact vector and lexical retrieval with application-controlled evidence identifiers.
+    value: Add visible AI and MCP capability without transferring evidence eligibility or routing authority to a model.
+
+  - scope_id: IS-06
+    future_epic_id: e06
+    release: v0.2
+    capability: Cited AI drafting and reviewer revision
+    includes:
+      - Evidence-backed draft assistance over snapshotted eligible passages.
+      - Application-controlled claim and citation identifiers with exact passage provenance.
+      - Typed no-answer, conflict, refusal, incomplete-output, timeout, and failure outcomes.
+      - Checkpoint-backed reviewer feedback and AI revision.
+      - Approval and release outside the AI orchestration boundary.
+    value: Demonstrate durable human-in-the-loop drafting while preserving authoritative human decisions.
+
+  - scope_id: IS-07
+    future_epic_id: e07
+    release: v0.2
+    capability: Focused evaluations and recruiter demonstration
+    includes:
+      - Versioned synthetic development and frozen evaluation fixtures for the single fictional product.
+      - Capability, regression, privacy-boundary, safety-routing, retrieval, grounding, authorization, and fallback checks.
+      - Deterministic provider tests by default and bounded real-provider evaluation evidence.
+      - A reproducible demonstration path and release disclosure of results, limitations, and deferred capabilities.
+    value: Support honest technical assessment without claiming clinical or real-world validation.
+
+out_of_scope:
+  - item: Real medical, personal, customer, company-case, or pharmaceutical-product data
+    reason: The project is a synthetic portfolio system and cannot safely or credibly operate on real cases.
+    disposition: never
+
+  - item: Diagnosis, treatment recommendations, causality assessment, or final safety and quality determinations
+    reason: These decisions require qualified human and organizational processes outside this product.
+    disposition: never
+
+  - item: Compliance, clinical-validation, regulatory-validation, or production-suitability claims
+    reason: The evidence and operating controls required for those claims are not present.
+    disposition: never
+
+  - item: Autonomous approval, escalation suppression, release, delivery, or destination selection
+    reason: These actions conflict with the mandatory human-control boundary.
+    disposition: never
+
+  - item: Real mailbox, CRM, safety-system, quality-system, contact-center, or email integrations
+    reason: Simulated adapters prove the workflow without creating external operational risk.
+    disposition: deferred_after_v0.2
+
+  - item: Live public evidence in operational cases, drafts, or evaluations
+    reason: Changing real records cannot provide controlled support for fictional products.
+    disposition: never_for_operational_use
+
+  - item: Read-only live PubMed and ClinicalTrials.gov demonstrations
+    reason: They are useful portfolio extensions but do not support the first recruiter release.
+    disposition: deferred_after_v0.2
+
+  - item: Arbitrary web search or provider-hosted retrieval tools
+    reason: Operational evidence must remain allowlisted, eligible, reproducible, and application-controlled.
+    disposition: never_for_operational_use
+
+  - item: Broad multilingual automation, translation, attachments, OCR, images, and office-document ingestion
+    reason: These inputs add sanitization and provenance risks that would displace the central text workflow.
+    disposition: deferred_after_v0.2
+
+  - item: Three-product breadth, content-lifecycle administration, and full target-v1.0 evaluation suites
+    reason: One deeply developed product provides stronger evidence within the 70-hour delivery budget.
+    disposition: deferred_after_v0.2
+
+  - item: Public cloud deployment, OIDC, anonymous operational access, and recruiter sandboxes
+    reason: Local attributable identities are sufficient for v0.2; public access needs a separate security scope.
+    disposition: deferred_after_v0.2
+
+  - item: Durable workers, queues, distributed services, multiple databases, Kubernetes, and Kafka
+    reason: Synchronous local execution is sufficient for v0.2 and avoids premature operational complexity.
+    disposition: deferred_until_measured_need
+
+  - item: Full regulated document management, formal content approval, electronic signatures, and collaborative redlining
+    reason: These are separate enterprise products rather than requirements for the scoped workflow proof.
+    disposition: deferred_indefinitely
+
+constraints:
+  delivery:
+    v0_1_due: 2026-08-07
+    v0_2_due: 2026-08-16
+    focused_solo_hours: 70
+    real_provider_budget_usd: 30
+  data:
+    operational_data: fictional_and_synthetic_only
+    automated_language: English
+    intake_format: text_only
+    product_count_v0_2: 1
+    raw_boundary: protected_original_never_reaches_automation_or_ordinary_telemetry
+  human_control:
+    ai_cannot:
+      - approve
+      - suppress_deterministic_findings
+      - release
+      - select_arbitrary_destinations
+      - confirm_delivery
+    manual_fallback_required: true
+  external_gates:
+    openai_paid_smoke_due: 2026-08-03
+    openai_failure_effect: v0.2_cannot_be_claimed_real_provider_complete
+  execution:
+    v0_2_mode: synchronous_user_initiated
+    durable_async_claim: false
+    ordinary_tests_use_paid_providers: false
+  technology_reference: specs/tech-architecture/tech-stack.md
+  workflow_reference: specs/workflows/solo-git.yaml
+
+success_criteria:
+  - criterion_id: SC-01
+    release: v0.1
+    outcome: A reviewer can complete one synthetic case from intake through confirmed simulated delivery without AI.
+    evidence: End-to-end acceptance test and audit reconstruction.
+
+  - criterion_id: SC-02
+    release: v0.1
+    outcome: The protected original never appears in model, embedding, MCP, log, trace, analytics, or public-connector inputs.
+    evidence: Seeded boundary-leakage tests with zero critical misses.
+
+  - criterion_id: SC-03
+    release: v0.1
+    outcome: Independent safety and quality findings retain exact spans and cannot be suppressed by a lower-confidence result.
+    evidence: Focused positive, uncertain, mixed, and negative triage fixtures.
+
+  - criterion_id: SC-04
+    release: v0.1
+    outcome: Only current eligible fictional evidence supports a cited draft, and insufficient evidence produces a no-answer path.
+    evidence: Eligibility, version-selection, wrong-product, and no-answer acceptance tests.
+
+  - criterion_id: SC-05
+    release: v0.1
+    outcome: An author or material editor cannot approve the same revision, and approval cannot release or confirm delivery.
+    evidence: Backend authorization, revision, release, idempotency, and receiver-confirmation tests.
+
+  - criterion_id: SC-06
+    release: v0.1
+    outcome: Audit history reconstructs the exact actors, representations, findings, evidence, revisions, decisions, and delivery attempts.
+    evidence: Audit reconstruction acceptance test.
+
+  - criterion_id: SC-07
+    release: v0.2
+    outcome: A bounded AI run consumes one exact sanitized revision and returns typed triage, retrieved evidence, and a cited draft.
+    evidence: Provider-contract tests and one documented end-to-end demonstration.
+
+  - criterion_id: SC-08
+    release: v0.2
+    outcome: LangGraph and MCP are visible in the workflow while tool selection, evidence eligibility, approval, and release remain application-controlled.
+    evidence: Orchestration trace, MCP contract tests, and authorization tests.
+
+  - criterion_id: SC-09
+    release: v0.2
+    outcome: Reviewer feedback creates a new AI-assisted draft revision without changing or approving an earlier revision.
+    evidence: Interrupt, resume, replay-safety, provenance, and revision acceptance tests.
+
+  - criterion_id: SC-10
+    release: v0.2
+    outcome: AI, embedding, refusal, timeout, parse, or budget failure leaves the complete manual workflow available.
+    evidence: Deterministic failure-injection tests.
+
+  - criterion_id: SC-11
+    release: v0.2
+    outcome: Focused frozen evaluations report sample size, slices, measured results, failures, and not-run checks without broader validation claims.
+    evidence: Versioned evaluation report and release disclosure.
+
+  - criterion_id: SC-12
+    release: v0.2
+    outcome: Required invariant fixtures have zero raw-boundary leaks, fabricated or ineligible citations, unauthorized approvals, and model-triggered releases.
+    evidence: Passing invariant evaluation gates.
+
+  - criterion_id: SC-13
+    release: v0.2
+    outcome: The selected local demonstration completes initial triage within 15 seconds and an evidence-backed draft within 60 seconds.
+    evidence: Timestamped performance report with documented environment and provider configuration.
+
+  - criterion_id: SC-14
+    release: v0.2
+    outcome: Paid OpenAI access passes before the external gate and stays within the development allowance.
+    evidence: Redacted smoke-test record and cost ledger; otherwise v0.2 remains real-provider incomplete.
+
+references:
+  - path: specs/planning-context.yaml
+    purpose: Confirmed product constraints, exclusions, target metrics, and elaboration decisions.
+  - path: specs/tech-architecture/tech-stack.md
+    purpose: Documentation-validated technology and provider boundaries.
+  - path: specs/state.yaml
+    purpose: Current workflow handoff and active decisions.
+  - path: specs/workflows/solo-git.yaml
+    purpose: Guarded solo-local delivery lifecycle.

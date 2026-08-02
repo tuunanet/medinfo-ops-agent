@@ -1,0 +1,19 @@
+story_id: e07s01
+title: Measure focused synthetic capabilities
+status: backlog
+bcps: 5
+risk: P1
+security: medium
+tasks:
+  - id: e07s01t01
+    description: Add versioned development and frozen synthetic fixtures with explicit capability, invariant, fallback, and slice graders.
+    verify: "make test"
+    status: backlog
+  - id: e07s01t02
+    description: Deliver deterministic evaluation execution and a report of sample sizes, measured results, failures, and not-run checks.
+    verify: "make test"
+    status: backlog
+  - id: e07s01t03
+    description: Prove frozen labels and holdouts cannot be changed by ordinary evaluation execution.
+    verify: "make preflight"
+    status: backlog

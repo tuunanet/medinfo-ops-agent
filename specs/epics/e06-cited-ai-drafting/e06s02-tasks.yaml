@@ -1,0 +1,19 @@
+story_id: e06s02
+title: Revise a draft from reviewer feedback
+status: backlog
+bcps: 5
+risk: P0
+security: high
+tasks:
+  - id: e06s02t01
+    description: Add failing checkpoint checks for stable thread identifiers, interrupt resume, replay safety, idempotent side effects, and revision provenance.
+    verify: "make test"
+    status: backlog
+  - id: e06s02t02
+    description: Deliver reviewer feedback and checkpointed AI revision as a new immutable unapproved draft.
+    verify: "make test"
+    status: backlog
+  - id: e06s02t03
+    description: Prove resume cannot change prior revisions, approve content, release content, or duplicate domain side effects.
+    verify: "make preflight"
+    status: backlog

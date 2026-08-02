@@ -1,0 +1,60 @@
+workflow_mode: solo-git
+active_flow: null
+active_epic_id: e01
+active_story_id: e01s01
+git:
+  branch: main
+  worktree: root
+  head: null
+active_decisions:
+- decision_id: solo-git-workflow
+  decision: Use the complete solo-local story lifecycle without mandatory pull requests.
+  rationale: Preserve worktree isolation and verification while removing solo PR ceremony.
+  artifact: specs/workflows/solo-git.yaml
+- decision_id: documentation-validated-v0-2-baseline
+  decision: Use the confirmed framework, provider, orchestration, MCP, retrieval,
+    persistence, and execution boundaries for v0.2.
+  rationale: Official documentation resolved external assumptions before scope and
+    implementation planning.
+  artifact: specs/tech-architecture/tech-stack.md
+- decision_id: v0-1-v0-2-delivery-scope
+  decision: Bound the current initiative to the v0.1 manual vertical slice and v0.2
+    recruiter-demonstrable AI increment.
+  rationale: Deliver one deeply developed fictional product within 70 hours and defer
+    target-v1.0 breadth to later scope decisions.
+  artifact: specs/product/SCOPE_LATEST.yaml
+- decision_id: v0-1-v0-2-vertical-slices
+  decision: Deliver seven epics through fourteen vertical stories totaling 64 Business
+    Complexity Points.
+  rationale: Each story adds demonstrable reviewer or evaluator value and stays at
+    five BCPs or less.
+  artifact: specs/release-plan.yaml
+- decision_id: e01s01-local-topology
+  decision: Run Next.js and FastAPI on pinned host runtimes, run PostgreSQL and pgvector
+    through Docker Compose, use uv and npm lockfiles, and lint with Ruff and ESLint.
+  rationale: Keep local iteration fast while preserving an exact, one-command development
+    contract.
+  artifact: specs/epics/e01-executable-local-foundation/e01s01-open-local-workspace.md
+- decision_id: sqlalchemy-alembic-persistence
+  decision: Use SQLAlchemy 2 typed mappings and Alembic migrations while keeping
+    Pydantic, domain, and persistence representations separate.
+  rationale: Preserve explicit trust and domain boundaries while supporting PostgreSQL
+    relationships, constraints, immutable records, and pgvector.
+  artifact: specs/adr/ADR-0001-sqlalchemy-persistence-and-alembic-migrations.md
+- decision_id: e01s02-development-auth
+  decision: Use a development-only fictional actor switcher with a signed HttpOnly
+    session and server-owned permission resolution.
+  rationale: Provide attributable local identities without implementing production
+    identity infrastructure before v0.2.
+  artifact: specs/epics/e01-executable-local-foundation/e01s02-use-attributable-local-roles.md
+handoff:
+  next_skill: kickoff-branch
+  reason: The approved e01 capsule is implementation-ready. Establish the initial verified repository baseline, then start e01s01 in an isolated worktree.
+  last_terminal_state: ready
+metrics:
+  story_start: null
+  skill_timings:
+    plan-work:
+      calls: 2
+      total_seconds: 1436.0
+      avg_seconds: 718.0

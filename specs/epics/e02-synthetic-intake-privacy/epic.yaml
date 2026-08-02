@@ -1,0 +1,27 @@
+id: e02
+title: Synthetic Intake and Privacy
+scope_id: IS-02
+target_release: v0.1
+wsjf: 7.5
+total_bcps: 8
+status: backlog
+outcome: A coordinator can create a synthetic case while keeping its protected original outside every automated boundary.
+stories:
+  - id: e02s01
+    title: Submit and reopen a synthetic request
+    value: A coordinator can submit English text, receive a case identifier, and reopen the protected case record.
+    bcps: 3
+    status: backlog
+    delta: ADDED
+    depends_on: [e01s02]
+    spec: e02s01-submit-synthetic-request.md
+    tasks: e02s01-tasks.yaml
+  - id: e02s02
+    title: Publish a sanitized working revision
+    value: A reviewer can approve a minimized working representation or route unsupported language to manual handling before automation.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e02s01]
+    spec: e02s02-publish-sanitized-revision.md
+    tasks: e02s02-tasks.yaml

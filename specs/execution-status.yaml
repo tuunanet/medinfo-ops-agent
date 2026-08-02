@@ -1,0 +1,202 @@
+# Sole source of truth for epic and story execution status.
+development_status:
+  e01: backlog
+  e01s01: backlog
+  e01s02: backlog
+  e02: backlog
+  e02s01: backlog
+  e02s02: backlog
+  e03: backlog
+  e03s01: backlog
+  e03s02: backlog
+  e04: backlog
+  e04s01: backlog
+  e04s02: backlog
+  e05: backlog
+  e05s01: backlog
+  e05s02: backlog
+  e06: backlog
+  e06s01: backlog
+  e06s02: backlog
+  e07: backlog
+  e07s01: backlog
+  e07s02: backlog
+
+epics:
+  e01:
+    status: backlog
+    title: Executable Local Foundation
+    wsjf: 10.0
+    total_bcps: 6
+  e02:
+    status: backlog
+    title: Synthetic Intake and Privacy
+    wsjf: 7.5
+    total_bcps: 8
+  e03:
+    status: backlog
+    title: Manual Triage and Evidence
+    wsjf: 7.5
+    total_bcps: 10
+  e04:
+    status: backlog
+    title: Human-Controlled Release
+    wsjf: 6.0
+    total_bcps: 10
+  e05:
+    status: backlog
+    title: AI Triage and Controlled Retrieval
+    wsjf: 5.4
+    total_bcps: 10
+  e06:
+    status: backlog
+    title: Cited AI Drafting and Revision
+    wsjf: 5.2
+    total_bcps: 10
+  e07:
+    status: backlog
+    title: Evaluation and Demonstration
+    wsjf: 5.2
+    total_bcps: 10
+
+stories:
+  e01s01:
+    status: backlog
+    title: Open a healthy local reviewer workspace
+    bcps: 3
+    epic: e01
+    tasks_total: 5
+    tasks_passing: 0
+    tasks_failing: 5
+    risk_max: P1
+    security_max: medium
+  e01s02:
+    status: backlog
+    title: Use attributable local roles
+    bcps: 3
+    epic: e01
+    tasks_total: 5
+    tasks_passing: 0
+    tasks_failing: 5
+    risk_max: P0
+    security_max: high
+  e02s01:
+    status: backlog
+    title: Submit and reopen a synthetic request
+    bcps: 3
+    epic: e02
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e02s02:
+    status: backlog
+    title: Publish a sanitized working revision
+    bcps: 5
+    epic: e02
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e03s01:
+    status: backlog
+    title: Record independent triage findings
+    bcps: 5
+    epic: e03
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e03s02:
+    status: backlog
+    title: Draft from eligible evidence or record no-answer
+    bcps: 5
+    epic: e03
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e04s01:
+    status: backlog
+    title: Approve an immutable revision with separation of duties
+    bcps: 5
+    epic: e04
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e04s02:
+    status: backlog
+    title: Release and audit confirmed simulated delivery
+    bcps: 5
+    epic: e04
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e05s01:
+    status: backlog
+    title: Run bounded AI triage without weakening safety
+    bcps: 5
+    epic: e05
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e05s02:
+    status: backlog
+    title: Retrieve eligible evidence through MCP
+    bcps: 5
+    epic: e05
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e06s01:
+    status: backlog
+    title: Generate an evidence-backed cited AI draft
+    bcps: 5
+    epic: e06
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e06s02:
+    status: backlog
+    title: Revise a draft from reviewer feedback
+    bcps: 5
+    epic: e06
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P0
+    security_max: high
+  e07s01:
+    status: backlog
+    title: Measure focused synthetic capabilities
+    bcps: 5
+    epic: e07
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P1
+    security_max: medium
+  e07s02:
+    status: backlog
+    title: Qualify and demonstrate the real provider
+    bcps: 5
+    epic: e07
+    tasks_total: 3
+    tasks_passing: 0
+    tasks_failing: 0
+    risk_max: P1
+    security_max: high

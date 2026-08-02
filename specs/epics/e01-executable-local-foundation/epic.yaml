@@ -1,0 +1,27 @@
+id: e01
+title: Executable Local Foundation
+scope_id: IS-01
+target_release: v0.1
+wsjf: 10.0
+total_bcps: 6
+status: backlog
+outcome: A reviewer can open the local product, observe system readiness, and act through an attributable development identity.
+stories:
+  - id: e01s01
+    title: Open a healthy local reviewer workspace
+    value: A reviewer can start the product and see that its web, API, and transactional boundaries are ready.
+    bcps: 3
+    status: backlog
+    delta: ADDED
+    depends_on: []
+    spec: e01s01-open-local-workspace.md
+    tasks: e01s01-tasks.yaml
+  - id: e01s02
+    title: Use attributable local roles
+    value: A reviewer can enter through a named fictional actor and only perform actions allowed by that actor's permissions.
+    bcps: 3
+    status: backlog
+    delta: MODIFIED
+    depends_on: [e01s01]
+    spec: e01s02-use-attributable-local-roles.md
+    tasks: e01s02-tasks.yaml

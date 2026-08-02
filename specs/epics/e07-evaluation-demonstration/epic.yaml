@@ -1,0 +1,27 @@
+id: e07
+title: Evaluation and Demonstration
+scope_id: IS-07
+target_release: v0.2
+wsjf: 5.2
+total_bcps: 10
+status: backlog
+outcome: A recruiter can follow a reproducible synthetic demonstration and inspect bounded evaluation evidence and limitations.
+stories:
+  - id: e07s01
+    title: Measure focused synthetic capabilities
+    value: A project reviewer can run frozen evaluations and inspect slice-level capability, invariant, and fallback results.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e04s02, e06s02]
+    spec: e07s01-measure-synthetic-capabilities.md
+    tasks: e07s01-tasks.yaml
+  - id: e07s02
+    title: Qualify and demonstrate the real provider
+    value: A recruiter can follow a bounded demonstration backed by redacted provider, cost, performance, and release evidence.
+    bcps: 5
+    status: backlog
+    delta: ADDED
+    depends_on: [e07s01]
+    spec: e07s02-qualify-real-provider-demo.md
+    tasks: e07s02-tasks.yaml
