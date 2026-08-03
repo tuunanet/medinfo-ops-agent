@@ -1,2 +1,57 @@
 # Generated bug index.
-bugs: []
+bugs:
+  - bug_id: BUG-2026-08-03T0841-flaky-cleanup-marker
+    date: 2026-08-03
+    status: fixed
+    severity: medium
+    priority: P1
+    scope: test-infrastructure
+    summary: Cleanup test start markers can precede termination trap setup.
+    file: specs/bugs/BUG-2026-08-03T0841-flaky-cleanup-marker.md
+    files_changed:
+      - tests/contract/test_development_orchestration.py
+    approach: Install termination traps before publishing host-process readiness markers.
+    risk_level: low
+    commit_message: "fix(test): publish cleanup markers after signal setup"
+  - bug_id: BUG-2026-08-03T090526-fresh-runtime-database-password
+    date: 2026-08-03
+    status: fixed
+    severity: medium
+    priority: P1
+    scope: local-database
+    summary: Fresh runtime credentials do not match the preserved PostgreSQL role.
+    file: specs/bugs/BUG-2026-08-03T090526-fresh-runtime-database-password.md
+    files_changed:
+      - scripts/database-container.sh
+      - tests/contract/test_database_container.py
+    approach: Validate and synchronize each generated credential before reporting readiness.
+    risk_level: medium
+    commit_message: "fix(database): synchronize fresh runtime credentials"
+  - bug_id: BUG-2026-08-03T131144-failed-database-start-cleanup
+    date: 2026-08-03
+    status: fixed
+    severity: medium
+    priority: P1
+    scope: local-database
+    summary: Failed database startup leaves the project container running.
+    file: specs/bugs/BUG-2026-08-03T131144-failed-database-start-cleanup.md
+    files_changed:
+      - scripts/database-container.sh
+      - tests/contract/test_database_container.py
+    approach: Roll back the project container on every post-create startup failure.
+    risk_level: medium
+    commit_message: "fix(database): clean up failed startup"
+  - bug_id: BUG-2026-08-03T131145-contradictory-readiness-payload
+    date: 2026-08-03
+    status: fixed
+    severity: medium
+    priority: P1
+    scope: reviewer-readiness
+    summary: Contradictory readiness fields can display overall ready.
+    file: specs/bugs/BUG-2026-08-03T131145-contradictory-readiness-payload.md
+    files_changed:
+      - apps/web/src/readiness.ts
+      - tests/web/readiness.test.ts
+    approach: Enforce coherent overall, database, and pgvector states at the browser boundary.
+    risk_level: medium
+    commit_message: "fix(web): enforce readiness state coherence"

@@ -1,0 +1,11 @@
+{
+  "defect_class": "resource-start-without-failure-rollback",
+  "grep_pattern": "podman run|docker run|subprocess.Popen|child_process.spawn",
+  "match_count": 1,
+  "sweep_scope": "scripts/ apps/ services/",
+  "patched_in_pr": [
+    "scripts/database-container.sh"
+  ],
+  "tracked_issues": [],
+  "notes": "The only persistent resource start installs an EXIT rollback immediately after creation and clears it only after readiness succeeds."
+}

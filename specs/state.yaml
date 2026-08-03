@@ -1,11 +1,11 @@
 workflow_mode: solo-git
-active_flow: null
+active_flow: release_branch
 active_epic_id: e01
 active_story_id: e01s01
 git:
-  branch: main
-  worktree: root
-  head: null
+  branch: feat/e01s01-local-workspace
+  worktree: ../medinfo-e01s01
+  head: e4fca64
 active_decisions:
 - decision_id: solo-git-workflow
   decision: Use the complete solo-local story lifecycle without mandatory pull requests.
@@ -30,14 +30,14 @@ active_decisions:
     five BCPs or less.
   artifact: specs/release-plan.yaml
 - decision_id: e01s01-local-topology
-  decision: Run Next.js and FastAPI on pinned host runtimes, run PostgreSQL and pgvector
-    through Docker Compose, use uv and npm lockfiles, and lint with Ruff and ESLint.
-  rationale: Keep local iteration fast while preserving an exact, one-command development
-    contract.
-  artifact: specs/epics/e01-executable-local-foundation/e01s01-open-local-workspace.md
+  decision: Run Next.js and FastAPI on pinned host runtimes and run PostgreSQL and
+    pgvector through direct rootless Podman commands.
+  rationale: Keep local iteration fast with one daemonless container runtime and no
+    Compose provider or Docker fallback.
+  artifact: specs/adr/ADR-0002-rootless-podman-for-local-database.md
 - decision_id: sqlalchemy-alembic-persistence
-  decision: Use SQLAlchemy 2 typed mappings and Alembic migrations while keeping
-    Pydantic, domain, and persistence representations separate.
+  decision: Use SQLAlchemy 2 typed mappings and Alembic migrations while keeping Pydantic,
+    domain, and persistence representations separate.
   rationale: Preserve explicit trust and domain boundaries while supporting PostgreSQL
     relationships, constraints, immutable records, and pgvector.
   artifact: specs/adr/ADR-0001-sqlalchemy-persistence-and-alembic-migrations.md
@@ -47,14 +47,49 @@ active_decisions:
   rationale: Provide attributable local identities without implementing production
     identity infrastructure before v0.2.
   artifact: specs/epics/e01-executable-local-foundation/e01s02-use-attributable-local-roles.md
+- decision_id: e01s01-bootstrap-preflight-exception
+  decision: Use the verified planning baseline once to create the e01s01 worktree
+    before the root Preflight command exists.
+  rationale: e01s01t01 owns the initial root command harness; all later gates must
+    use make preflight.
+  artifact: specs/verifications/e01s01-bootstrap-baseline.md
+environment:
+  python: 3.14.6
+  node: 24.18.1
+  uv: 0.11.26
+  npm: 11.16.0
+  podman: 5.7.0
+  podman_rootless: true
+release:
+  decision: release
+  squash_message: 'feat(workspace): add executable local reviewer workspace'
+  semantic_effect: minor
+  preflight: passed
+  coverage: passed
+  security: passed
+  traceability: passed
+  ci_verified: not_run
+  ci_reason: No CI workflow is configured in this repository.
 handoff:
-  next_skill: kickoff-branch
-  reason: The approved e01 capsule is implementation-ready. Establish the initial verified repository baseline, then start e01s01 in an isolated worktree.
-  last_terminal_state: ready
+  next_skill: survey-context
+  reason: e01s01 release gates passed. Resume from main after the guarded landing.
+  last_terminal_state: success
 metrics:
-  story_start: null
+  story_start: 2026-08-02 14:44:09+00:00
   skill_timings:
     plan-work:
       calls: 2
       total_seconds: 1436.0
       avg_seconds: 718.0
+    develop-tdd:
+      calls: 10
+      total_seconds: 4181.0
+      avg_seconds: 418.1
+    verify-work:
+      calls: 2
+      total_seconds: 485.0
+      avg_seconds: 242.5
+    release-branch:
+      calls: 1
+      total_seconds: 457.0
+      avg_seconds: 457.0

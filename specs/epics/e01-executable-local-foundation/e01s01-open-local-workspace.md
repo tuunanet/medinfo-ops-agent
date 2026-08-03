@@ -35,7 +35,7 @@ Preconditions:
 
 - Python 3.14.6 is available through `uv` and `.python-version`.
 - Node.js 24.18.1 is active and matches `.nvmrc` and the package engine constraint.
-- Docker Compose can start the pinned PostgreSQL 18 and pgvector 0.8.6 image.
+- Rootless Podman 5.7.0 or newer can start the pinned PostgreSQL 18 and pgvector 0.8.6 OCI image.
 - Python dependencies are locked in `uv.lock`.
 - Node.js dependencies are locked in `package-lock.json`.
 - No paid-provider credential is required.
@@ -43,7 +43,7 @@ Preconditions:
 ### 5. Main flow and business logic [locked]
 
 1. The command contract checks the required Python, Node.js, package-manager, and container tools.
-2. Docker Compose starts the PostgreSQL/pgvector service.
+2. Direct rootless Podman commands start the PostgreSQL/pgvector container.
 3. The database initializes the `vector` extension idempotently.
 4. The host starts FastAPI and Next.js development processes.
 5. FastAPI reports process liveness independently from dependency readiness.
@@ -78,7 +78,7 @@ Not applicable — this story creates no operational case, product, evidence, ac
 - Browser to Next.js workspace — perennial, direction: both.
 - Next.js workspace to FastAPI health boundary — perennial, direction: both.
 - FastAPI to PostgreSQL — perennial, direction: both.
-- Root development command to Docker Compose — ethereal, direction: both.
+- Root development command to rootless Podman — ethereal, direction: both.
 - Application to paid providers — ethereal, direction: out, permitted calls: 0.
 
 ### 10. Background processes [locked]
@@ -101,6 +101,7 @@ This story emits ordinary operational logs, not immutable case audit events. Eac
 - API port — source: config — local default is 8000.
 - Database port — source: config — local default is 5432.
 - Runtime versions — source: config — exact values come from `.python-version`, `.nvmrc`, and package metadata.
+- Container engine version — source: config — require rootless Podman 5.7.0 or newer and reject older versions before startup.
 
 ### 14. Quality attributes *NFR* [locked]
 
@@ -130,7 +131,7 @@ This story emits ordinary operational logs, not immutable case audit events. Eac
 ### 17. Acceptance criteria [locked]
 
 Scenario: Healthy local workspace
-  Given Python 3.14.6, Node.js 24.18.1, and Docker Compose are available
+  Given Python 3.14.6, Node.js 24.18.1, and rootless Podman 5.7.0 or newer are available
   And PostgreSQL 18 starts with pgvector 0.8.6
   When the developer-operator starts the workspace with make dev
   Then API liveness returns HTTP 200
@@ -191,7 +192,9 @@ Not applicable — the local topology, package managers, lint tools, readiness b
 - `specs/planning-context.yaml` — synthetic-only, timing, and root-command constraints.
 - `AGENTS.md` — project safety and workflow rules.
 - <https://nextjs.org/blog/next-16> — Next.js 16 runtime baseline.
-- <https://github.com/pgvector/pgvector#docker> — versioned PostgreSQL/pgvector image and extension setup.
+- <https://github.com/pgvector/pgvector#docker> — versioned PostgreSQL/pgvector OCI image and extension setup.
+- <https://docs.podman.io/en/stable/markdown/podman.1.html> — daemonless and rootless Podman behavior.
+- <https://docs.podman.io/en/stable/markdown/podman-compose.1.html> — external Compose provider behavior intentionally avoided here.
 
 ## Requirement deltas [locked]
 
@@ -199,9 +202,11 @@ Not applicable — the local topology, package managers, lint tools, readiness b
 
 The repository must require Python 3.14.6 and Node.js 24.18.1 and must fail clearly before startup when either runtime differs.
 
-#### ADDED: R-e01s01-02 One-command hybrid development topology
+#### MODIFIED: R-e01s01-02 One-command hybrid development topology
 
-`make dev` must run Next.js and FastAPI on the host and PostgreSQL/pgvector through Docker Compose.
+**Before:** `make dev` runs Next.js and FastAPI on the host and PostgreSQL/pgvector through Docker Compose.
+
+**After:** `make dev` runs Next.js and FastAPI on the host and the pinned PostgreSQL/pgvector OCI image through direct rootless Podman commands, without Compose or a Docker fallback.
 
 #### ADDED: R-e01s01-03 Independent liveness and dependency readiness
 
@@ -218,19 +223,19 @@ The reviewer workspace must display API, database, and pgvector readiness and mu
 ## Implementation steps [locked]
 
 1. Establish the pinned runtime files, `uv` and `npm` lock roots, root command harness, and contract tests without introducing application behavior → verify: `make test`
-2. Add the pinned PostgreSQL/pgvector Compose service and FastAPI liveness/readiness behavior, including database and extension failure tests and no new security findings in affected paths → verify: `make test`
+2. Add the rootless Podman lifecycle for the pinned PostgreSQL/pgvector OCI image and FastAPI liveness/readiness behavior, including database and extension failure tests and no new security findings in affected paths → verify: `make test`
 3. Add the minimal Next.js reviewer workspace and Playwright checks for ready, API-unavailable, database-unavailable, and pgvector-unavailable states → verify: `make test`
 4. Add host-process development orchestration with runtime checks, startup failure propagation, and cleanup behavior without adding a general process-management framework → verify: `make build`
 5. Complete Ruff, ESLint, lockfile, runtime, deterministic-test, and no-paid-provider gates and confirm no new security findings in affected paths → verify: `make preflight`
 
 ## Verification Script (Step-by-Step) [locked]
 
-1. Activate Node.js 24.18.1 and ensure `uv` can resolve Python 3.14.6.
+1. Activate Node.js 24.18.1, ensure `uv` can resolve Python 3.14.6, and confirm rootless Podman 5.7.0 or newer is available.
 2. Run `make preflight` and confirm every root gate succeeds without provider credentials.
 3. Run `make dev` and wait for the workspace URL.
 4. Open the workspace and confirm the synthetic-demonstration notice and all ready states.
 5. Request API liveness and readiness and confirm both return HTTP 200.
-6. Stop PostgreSQL and confirm liveness remains HTTP 200 while readiness returns HTTP 503.
+6. Stop the rootless Podman PostgreSQL container and confirm liveness remains HTTP 200 while readiness returns HTTP 503.
 7. Refresh the workspace and confirm it no longer reports ready.
 8. Restart PostgreSQL, remove or disable pgvector in the isolated test database, and confirm readiness remains HTTP 503.
 9. Stop FastAPI and confirm the workspace reports API unavailable without false dependency success.
@@ -238,7 +243,8 @@ The reviewer workspace must display API, database, and pgvector readiness and mu
 
 ## Risks [locked]
 
-- Host runtime drift can make the one-command experience unreliable. Detect it before startup through exact version checks.
+- Host runtime drift can make the one-command experience unreliable. Detect Python and Node.js exactly and enforce the minimum Podman version before startup.
+- Rootless storage or port behavior can vary by host configuration. Use a Podman-managed named volume, publish only the configured local port, and verify both on Kubuntu 26.04 LTS.
 - Health endpoints can leak infrastructure details. Return bounded status identifiers and test that secrets and stack traces are absent.
 - A readiness check can become a false-positive cache. Fetch current dependency state and test failure transitions.
 - Cross-platform process cleanup can expand the story. Support the documented Linux development environment first and avoid a general supervisor.
@@ -255,7 +261,7 @@ A single development orchestration script is justified because one root command 
 ## Slopcheck [locked]
 
 - `[OK]` uv and npm — narrow package and lockfile managers selected by the user.
-- `[OK]` Docker Compose — local PostgreSQL/pgvector lifecycle only.
+- `[OK]` rootless Podman — direct lifecycle for one local PostgreSQL/pgvector OCI container; no Compose provider or daemon socket.
 - `[OK]` FastAPI, Pydantic, psycopg, and Uvicorn — bounded API and readiness stack.
 - `[OK]` Next.js 16, React, and TypeScript — locked reviewer-interface stack.
 - `[OK]` PostgreSQL 18 and pgvector 0.8.6 — validated transactional and vector baseline.
@@ -265,4 +271,4 @@ A single development orchestration script is justified because one root command 
 
 ## Red-flag check [locked]
 
-The plan avoids three rationalizations: using Docker for every process despite the chosen hybrid topology, adding authentication before e01s02, and introducing a general shared utility or process supervisor for one local command.
+The plan avoids four rationalizations: running every process in containers despite the chosen hybrid topology, adding an external Compose provider for one container, retaining an unrequested Docker fallback, and adding authentication before e01s02. It also avoids a general shared utility or process supervisor for one local command.

@@ -1,0 +1,130 @@
+story_id: e01s01
+verified_at: "2026-08-03T13:38:34Z"
+verifier: verify-work
+risk: P1
+phases:
+  preflight:
+    passed: true
+    command: make preflight
+  task_verification:
+    passed: true
+    tasks:
+      - task_id: e01s01t01
+        command: make test
+        exit_code: 0
+      - task_id: e01s01t02
+        command: make test
+        exit_code: 0
+      - task_id: e01s01t03
+        command: make test
+        exit_code: 0
+      - task_id: e01s01t04
+        command: make build
+        exit_code: 0
+      - task_id: e01s01t05
+        command: make preflight
+        exit_code: 0
+  smoke:
+    passed: true
+    configuration:
+      database_port: 55432
+      api_port: 18000
+      web_port: 13000
+    evidence: Fresh Next.js cache boot returned HTTP 200 for liveness, readiness, workspace, and same-origin proxy. Shutdown left PostgreSQL exited with code 0, no OOM kill, and all configured ports closed.
+  build:
+    passed: true
+    command: make build
+  typecheck:
+    passed: true
+    command: npm exec -- tsc --noEmit -p apps/web/tsconfig.json
+  lint:
+    passed: true
+    command: make lint
+  tests:
+    passed: true
+    command: make test
+    results:
+      python: 16
+      node: 1
+      playwright: 5
+  terminal_verdict:
+    command: make preflight
+    exit_code: 0
+    captured_at: "2026-08-03T13:38:25Z"
+    note: Single contiguous post-fix run. Runtime, lock, lint, test, and production build phases all executed after every audit defect was resolved.
+  security:
+    passed: true
+    report: specs/security/REVIEW.md
+    blocking_findings: 0
+  traceability:
+    passed: true
+    report: specs/TRACEABILITY_LATEST.md
+    matrix: specs/traceability-matrix.json
+  blind_spots:
+    passed: true
+    report: specs/blind-spots.json
+    high_findings: 0
+  completeness:
+    passed: true
+    blockers: 0
+    warnings: 0
+  coverage:
+    passed: true
+    report: specs/verifications/e01s01-coverage.md
+    overall_measured_percent: 100
+    business_logic_percent: 100
+  manual:
+    approved_on: "2026-08-03"
+    approved_by: human-operator
+    steps:
+      - step: Run Preflight with the pinned runtimes.
+        expected: Every local gate completes without paid-provider access.
+        actual: Preflight passed after activating Node.js 24.18.1 and npm 11.16.0.
+        passed: true
+      - step: Start the hybrid workspace on an available configured database port.
+        expected: PostgreSQL, FastAPI, and Next.js become ready.
+        actual: The workspace started with PostgreSQL on loopback port 55432.
+        passed: true
+      - step: View healthy reviewer readiness.
+        expected: API, database, and pgvector display ready with the synthetic-use notice.
+        actual: The reviewer page displayed all ready states and the notice.
+        passed: true
+      - step: Make PostgreSQL unavailable.
+        expected: Liveness remains HTTP 200 and readiness becomes HTTP 503.
+        actual: The dependency failure remained distinct and did not produce false readiness.
+        passed: true
+      - step: Make pgvector unavailable in the isolated database.
+        expected: Readiness becomes HTTP 503 and pgvector displays unavailable.
+        actual: The extension failure remained visible and blocked readiness.
+        passed: true
+      - step: Run standalone web mode without FastAPI.
+        expected: API displays unavailable and dependencies display not checked.
+        actual: Screenshot evidence showed the exact unavailable and not-checked states with actionable guidance.
+        passed: true
+      - step: Stop the development workspace.
+        expected: Host descendants terminate and PostgreSQL shuts down cleanly.
+        actual: The Podman container exited with code 0, logged a completed checkpoint and database shutdown, and left no project listeners or host application processes.
+        passed: true
+      - step: Restart the preserved database volume with a fresh runtime directory.
+        expected: The newly published application credential authenticates before readiness is reported.
+        actual: Live validation on loopback port 55435 reported both the database and pgvector ready, exposed no credential in output or process arguments, preserved runtime permissions, and stopped cleanly.
+        passed: true
+      - step: Fail database validation after container creation.
+        expected: Startup returns the original failure and stops the created container.
+        actual: Live invalid-configuration validation returned status 1 and left the project container exited.
+        passed: true
+      - step: Interpret a shape-valid but contradictory readiness response.
+        expected: The browser model fails closed while a coherent healthy response remains ready.
+        actual: The contradictory response mapped to API unavailable and dependencies not checked; the healthy response remained ready.
+        passed: true
+  gaps:
+    closed: true
+    resolved:
+      - bug_id: BUG-2026-08-03T0841-flaky-cleanup-marker
+        evidence: Deterministic regression passed 25 consecutive runs and final Preflight.
+      - bug_id: BUG-2026-08-03T090526-fresh-runtime-database-password
+        evidence: Preserved-volume regression, live fresh-runtime readiness, security checks, and final Preflight passed.
+      - bug_id: BUG-2026-08-03T131144-failed-database-start-cleanup
+        evidence: Failed-start regression, live container rollback, security checks, and final Preflight passed.
+      - bug_id: BUG-2026-08-03T131145-contradictory-readiness-payload
+        evidence: Semantic parser regression, direct behavioral proof, security checks, and final Preflight passed.

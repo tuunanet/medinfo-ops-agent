@@ -1,0 +1,33 @@
+{
+  "name": "medinfo-ops-agent",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Human-controlled synthetic medical-information workflow",
+  "engines": {
+    "node": "24.18.1",
+    "npm": "11.16.0"
+  },
+  "packageManager": "npm@11.16.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "overrides": {
+    "next": {
+      "postcss": "8.5.25",
+      "sharp": "0.35.3"
+    }
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings=0",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:e2e": "playwright test",
+    "test:unit": "node --test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.2.12",
+    "typescript": "6.0.3"
+  }
+}

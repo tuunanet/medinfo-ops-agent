@@ -1,0 +1,11 @@
+{
+  "defect_class": "shape-valid-payload-without-cross-field-invariant",
+  "grep_pattern": "function is[A-Za-z]+Payload|safeParse|parse\\(",
+  "match_count": 1,
+  "sweep_scope": "apps/ services/",
+  "patched_in_pr": [
+    "apps/web/src/readiness.ts"
+  ],
+  "tracked_issues": [],
+  "notes": "The only explicit payload parser now validates shape, enum values, HTTP agreement, and coherent dependency-state combinations."
+}

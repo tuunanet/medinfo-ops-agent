@@ -1,0 +1,425 @@
+{
+  "generated_at": "2026-08-03T13:36:48.055535+00:00",
+  "matrix_version": "1.0",
+  "stories": [
+    {
+      "id": "e01s01",
+      "title": "Open a healthy local reviewer workspace",
+      "epic_id": "e01",
+      "epic_title": "Executable Local Foundation",
+      "bcp": 0,
+      "wsjf": 10.0,
+      "status": "done",
+      "links": [
+        {
+          "file": "services/api/medinfo_api/postgres_readiness.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "services/api/medinfo_api/main.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "services/api/medinfo_api/readiness.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "scripts/run-lint.sh",
+          "line": 2,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "scripts/database-container.sh",
+          "line": 2,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "scripts/check-runtime-versions.sh",
+          "line": 2,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "scripts/dev.sh",
+          "line": 2,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "scripts/run-build.sh",
+          "line": 2,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "scripts/verify-tdd-red-commit.sh",
+          "line": 2,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "scripts/run-preflight.sh",
+          "line": 2,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/web/readiness.test.ts",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/api/test_postgres_readiness.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/api/test_health_api.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/contract/test_development_orchestration.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/contract/test_preflight_command.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/contract/test_root_commands.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/contract/test_database_container.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/contract/test_lint_command.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "tests/contract/test_build_command.py",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "playwright.config.ts",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "apps/web/next.config.ts",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "apps/web/src/readiness.ts",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "apps/web/e2e/readiness.spec.ts",
+          "line": 1,
+          "confidence": "high",
+          "method": "explicit_tag"
+        },
+        {
+          "file": "specs/epics/e01-executable-local-foundation/e01s01-open-local-workspace.md",
+          "line": 0,
+          "confidence": "medium",
+          "method": "file_heuristic"
+        },
+        {
+          "file": "specs/epics/e01-executable-local-foundation/e01s01-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 25
+    },
+    {
+      "id": "e01s02",
+      "title": "Use attributable local roles",
+      "epic_id": "e01",
+      "epic_title": "Executable Local Foundation",
+      "bcp": 0,
+      "wsjf": 10.0,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e01-executable-local-foundation/e01s02-use-attributable-local-roles.md",
+          "line": 0,
+          "confidence": "medium",
+          "method": "file_heuristic"
+        },
+        {
+          "file": "specs/epics/e01-executable-local-foundation/e01s02-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 2
+    },
+    {
+      "id": "e02s01",
+      "title": "Submit and reopen a synthetic request",
+      "epic_id": "e02",
+      "epic_title": "Synthetic Intake and Privacy",
+      "bcp": 0,
+      "wsjf": 7.5,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e02-synthetic-intake-privacy/e02s01-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e02s02",
+      "title": "Publish a sanitized working revision",
+      "epic_id": "e02",
+      "epic_title": "Synthetic Intake and Privacy",
+      "bcp": 0,
+      "wsjf": 7.5,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e02-synthetic-intake-privacy/e02s02-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e03s01",
+      "title": "Record independent triage findings",
+      "epic_id": "e03",
+      "epic_title": "Manual Triage and Evidence",
+      "bcp": 0,
+      "wsjf": 7.5,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e03-manual-triage-evidence/e03s01-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e03s02",
+      "title": "Draft from eligible evidence or record no-answer",
+      "epic_id": "e03",
+      "epic_title": "Manual Triage and Evidence",
+      "bcp": 0,
+      "wsjf": 7.5,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e03-manual-triage-evidence/e03s02-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e04s01",
+      "title": "Approve an immutable revision with separation of duties",
+      "epic_id": "e04",
+      "epic_title": "Human-Controlled Release",
+      "bcp": 0,
+      "wsjf": 6.0,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e04-human-controlled-release/e04s01-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e04s02",
+      "title": "Release and audit confirmed simulated delivery",
+      "epic_id": "e04",
+      "epic_title": "Human-Controlled Release",
+      "bcp": 0,
+      "wsjf": 6.0,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e04-human-controlled-release/e04s02-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e05s01",
+      "title": "Run bounded AI triage without weakening safety",
+      "epic_id": "e05",
+      "epic_title": "AI Triage and Controlled Retrieval",
+      "bcp": 0,
+      "wsjf": 5.4,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e05-ai-triage-retrieval/e05s01-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e05s02",
+      "title": "Retrieve eligible evidence through MCP",
+      "epic_id": "e05",
+      "epic_title": "AI Triage and Controlled Retrieval",
+      "bcp": 0,
+      "wsjf": 5.4,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e05-ai-triage-retrieval/e05s02-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e06s01",
+      "title": "Generate an evidence-backed cited AI draft",
+      "epic_id": "e06",
+      "epic_title": "Cited AI Drafting and Revision",
+      "bcp": 0,
+      "wsjf": 5.2,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e06-cited-ai-drafting/e06s01-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e06s02",
+      "title": "Revise a draft from reviewer feedback",
+      "epic_id": "e06",
+      "epic_title": "Cited AI Drafting and Revision",
+      "bcp": 0,
+      "wsjf": 5.2,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e06-cited-ai-drafting/e06s02-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e07s01",
+      "title": "Measure focused synthetic capabilities",
+      "epic_id": "e07",
+      "epic_title": "Evaluation and Demonstration",
+      "bcp": 0,
+      "wsjf": 5.2,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e07-evaluation-demonstration/e07s01-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    },
+    {
+      "id": "e07s02",
+      "title": "Qualify and demonstrate the real provider",
+      "epic_id": "e07",
+      "epic_title": "Evaluation and Demonstration",
+      "bcp": 0,
+      "wsjf": 5.2,
+      "status": "backlog",
+      "links": [
+        {
+          "file": "specs/epics/e07-evaluation-demonstration/e07s02-tasks.yaml",
+          "line": 0,
+          "confidence": "low",
+          "method": "task_reference"
+        }
+      ],
+      "link_count": 1
+    }
+  ],
+  "summary": {
+    "total_stories": 14,
+    "tagged_stories": 1,
+    "dark_stories": [],
+    "dark_count": 0,
+    "orphan_tags": [],
+    "orphan_count": 0,
+    "stale_tags": [
+      "e01s01"
+    ],
+    "stale_count": 1,
+    "oracle_stats": {
+      "high": 23,
+      "medium": 2,
+      "low": 14
+    }
+  }
+}

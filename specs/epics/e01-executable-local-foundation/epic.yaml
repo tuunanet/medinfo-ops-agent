@@ -11,8 +11,8 @@ stories:
     title: Open a healthy local reviewer workspace
     value: A reviewer can start the product and see that its web, API, and transactional boundaries are ready.
     bcps: 3
-    status: backlog
-    delta: ADDED
+    status: done
+    delta: MODIFIED
     depends_on: []
     spec: e01s01-open-local-workspace.md
     tasks: e01s01-tasks.yaml

@@ -247,7 +247,7 @@ NEVER let an author approve their own material revision.
 
 Require a separate explicit release action after approval.
 
-## Tests
+## Tests (F.I.R.S.T.)
 
 Follow F.I.R.S.T. test principles.
 

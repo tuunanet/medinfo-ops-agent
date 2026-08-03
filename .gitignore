@@ -20,6 +20,9 @@ node_modules/
 .next/
 out/
 coverage/
+playwright-report/
+test-results/
+apps/web/next-env.d.ts
 *.tsbuildinfo
 
 # Build and runtime artifacts

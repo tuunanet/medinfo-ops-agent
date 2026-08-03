@@ -1,0 +1,12 @@
+{
+  "defect_class": "signal-readiness-marker-before-handler",
+  "grep_pattern": "touch \\\"\\$[A-Z_]*STARTED\\\"\\n(?:[^\\n]*\\n){0,2}trap ",
+  "match_count": 0,
+  "sweep_scope": "tests/",
+  "patched_in_pr": [
+    "fake API parent and worker startup marker",
+    "fake npm startup marker"
+  ],
+  "tracked_issues": [],
+  "notes": "All startup markers in shell-based test fixtures now follow termination trap setup."
+}

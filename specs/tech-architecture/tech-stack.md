@@ -14,6 +14,7 @@ Status: documentation-validated v0.2 baseline as of 1 August 2026.
 | Frontend runtime | Node.js 24.18.1 LTS | Do not develop against the locally active Node.js 26 runtime. |
 | Frontend framework | Next.js 16 App Router, React, and TypeScript | Resolve and lock exact stable versions. Do not use canary packages. |
 | Database | PostgreSQL 18 with pgvector 0.8.6 | Use the versioned `0.8.6-pg18-trixie` development and CI image. |
+| Local container runtime | Rootless Podman 5.7.0 or newer | Run the single database OCI container through direct Podman commands. Do not add Compose, Docker fallback, privileged mode, or a network API socket. |
 | Tests | pytest and Playwright | Ordinary tests use deterministic providers and make no paid calls. |
 
 Python dependency resolution succeeded for 99 packages on local CPython 3.14.4. This result proves resolver compatibility only. The install, import, database, checkpoint, and MCP smoke test must pass on Python 3.14.6.
@@ -83,7 +84,10 @@ A durable worker and queue, cloud host, OIDC provider, observability backend, ob
 - FastMCP installation and versioning: <https://gofastmcp.com/getting-started/installation>
 - FastMCP transports: <https://gofastmcp.com/clients/client>
 - Next.js 16: <https://nextjs.org/blog/next-16>
-- pgvector search, filtering, and Docker versions: <https://github.com/pgvector/pgvector>
+- pgvector search, filtering, and OCI image versions: <https://github.com/pgvector/pgvector>
+- Podman daemonless and rootless operation: <https://docs.podman.io/en/stable/markdown/podman.1.html>
+- Podman Compose provider behavior: <https://docs.podman.io/en/stable/markdown/podman-compose.1.html>
+- Podman installation on Ubuntu: <https://podman.io/docs/installation>
 - FastAPI background-task limits: <https://fastapi.tiangolo.com/tutorial/background-tasks/#caveat>
 - SQLAlchemy 2 typed mappings: <https://docs.sqlalchemy.org/en/20/orm/quickstart.html>
 - Alembic migrations: <https://alembic.sqlalchemy.org/en/latest/tutorial.html>

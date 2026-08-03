@@ -1,28 +1,28 @@
 story_id: e01s01
 spec: e01s01-open-local-workspace.md
 title: Open a healthy local reviewer workspace
-status: failing
+status: passing
 bcps: 3
 risk: P1
 security: medium
 tasks:
   - id: e01s01t01
-    description: Establish pinned runtime files, uv and npm lock roots, root command targets, and executable command-contract tests.
+    description: Establish pinned runtime files, uv and npm lock roots, root command targets, and executable command-contract tests for Python, Node.js, and rootless Podman.
     verify: "make test"
     risk: P1
     security: low
-    status: failing
+    status: passing
     allure:
       severity: high
       categories:
         - Foundation
         - Contract
   - id: e01s01t02
-    description: Add the PostgreSQL and pgvector service plus FastAPI liveness and readiness tests, and confirm no new security findings in affected paths.
+    description: Add the rootless Podman PostgreSQL and pgvector container plus FastAPI liveness and readiness tests, and confirm no new security findings in affected paths.
     verify: "make test"
     risk: P1
     security: medium
-    status: failing
+    status: passing
     allure:
       severity: high
       categories:
@@ -33,18 +33,18 @@ tasks:
     verify: "make test"
     risk: P1
     security: low
-    status: failing
+    status: passing
     allure:
       severity: high
       categories:
         - Browser
         - Accessibility
   - id: e01s01t04
-    description: Add hybrid host-process and Docker Compose development orchestration with failure propagation, cleanup checks, and no new security findings in affected paths.
+    description: Add hybrid host-process and direct rootless Podman orchestration with failure propagation, cleanup checks, and no new security findings in affected paths.
     verify: "make build"
     risk: P1
     security: medium
-    status: failing
+    status: passing
     allure:
       severity: high
       categories:
@@ -55,7 +55,7 @@ tasks:
     verify: "make preflight"
     risk: P1
     security: medium
-    status: failing
+    status: passing
     allure:
       severity: high
       categories:
