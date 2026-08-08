@@ -1,5 +1,17 @@
 # Generated bug index.
 bugs:
+  - bug_id: BUG-2026-08-07T0118-plan-consistency-gates
+    date: 2026-08-07
+    status: open
+    severity: low
+    priority: P3
+    scope: planning-infrastructure
+    summary: Required planning and verification gate scripts are absent.
+    file: specs/bugs/BUG-2026-08-07T0118-plan-consistency-gates.md
+    files_changed: []
+    approach: Add separately planned lifecycle gate scripts and tests; retain explicit manual verification and mark unavailable gates not_run until then.
+    risk_level: low
+    commit_message: null
   - bug_id: BUG-2026-08-03T0841-flaky-cleanup-marker
     date: 2026-08-03
     status: fixed

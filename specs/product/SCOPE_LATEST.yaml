@@ -1,7 +1,7 @@
 status: complete
 initiative: medinfo-ops-agent
-scope_version: 1
-scoped_on: 2026-08-01
+scope_version: 2
+scoped_on: 2026-08-07
 
 core_value: >-
   Give trained reviewers a faster, evidence-grounded first pass through fictional
@@ -46,6 +46,17 @@ in_scope:
       - One primary transactional store for workflow, evidence, and audit records.
       - One deeply developed fictional product with repository-managed seed actors and content.
     value: Establish a credible product surface and trustworthy persistence boundary for the vertical slice.
+
+  - scope_id: IS-08
+    future_epic_id: e08
+    release: v0.1
+    capability: Npm dependency maturity and acquisition controls
+    includes:
+      - A project-owned npm policy that requires a rolling 30-day release-age hold whenever npm resolves dependencies.
+      - Exact direct dependency specifications and a committed, integrity-bearing `package-lock.json` for every workspace.
+      - Registry-only dependency sources, strict runtime and peer-dependency checks, and installation without dependency lifecycle scripts.
+      - Deterministic contract checks that fail if the age hold or acquisition controls are removed.
+    value: Reduce exposure to newly published or newly compromised npm releases without silently updating the verified local stack.
 
   - scope_id: IS-02
     future_epic_id: e02
@@ -169,6 +180,10 @@ out_of_scope:
     reason: These are separate enterprise products rather than requirements for the scoped workflow proof.
     disposition: deferred_indefinitely
 
+  - item: Automatic dependency upgrades, a private package proxy, an SBOM platform, or a vulnerability-management service
+    reason: The immediate change hardens npm resolution and installation locally; broader dependency-governance capabilities require separate ownership, infrastructure, and review.
+    disposition: deferred_after_v0.2
+
 constraints:
   delivery:
     v0_1_due: 2026-08-07
@@ -196,6 +211,12 @@ constraints:
     v0_2_mode: synchronous_user_initiated
     durable_async_claim: false
     ordinary_tests_use_paid_providers: false
+  dependency_acquisition:
+    npm_min_release_age_days: 30
+    direct_dependencies: exact_versions_only
+    install_scripts: disabled
+    permitted_dependency_sources: npm_registry_only
+    lockfile: committed_and_integrity_bearing
   technology_reference: specs/tech-architecture/tech-stack.md
   workflow_reference: specs/workflows/solo-git.yaml
 
@@ -270,11 +291,20 @@ success_criteria:
     outcome: Paid OpenAI access passes before the external gate and stays within the development allowance.
     evidence: Redacted smoke-test record and cost ledger; otherwise v0.2 remains real-provider incomplete.
 
+  - criterion_id: SC-15
+    release: v0.1
+    outcome: A dependency resolution cannot select an npm release newer than 30 days, and a clean install uses only exact, locked, integrity-bearing registry packages without dependency lifecycle scripts.
+    evidence: Version-controlled npm policy, contract tests, and a passing `npm ci --ignore-scripts --min-release-age=30` preflight check.
+
 references:
   - path: specs/planning-context.yaml
     purpose: Confirmed product constraints, exclusions, target metrics, and elaboration decisions.
   - path: specs/tech-architecture/tech-stack.md
     purpose: Documentation-validated technology and provider boundaries.
+  - url: https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem
+    purpose: Incident-specific recommendation to review lockfiles and pin known-safe npm releases after the Shai-Hulud supply-chain compromise.
+  - url: https://docs.npmjs.com/cli/v11/using-npm/config#min-release-age
+    purpose: npm release-age configuration semantics.
   - path: specs/state.yaml
     purpose: Current workflow handoff and active decisions.
   - path: specs/workflows/solo-git.yaml

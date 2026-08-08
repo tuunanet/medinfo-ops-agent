@@ -10,7 +10,8 @@ export MEDINFO_ALLOW_PAID_PROVIDER_CALLS=false
 
 scripts/check-runtime-versions.sh
 uv lock --check
-npm ci --ignore-scripts --dry-run --no-audit --no-fund
+uv run --locked python scripts/check-npm-acquisition-policy.py
+npm ci --ignore-scripts --dry-run --no-audit --no-fund --min-release-age=30 --allow-directory=none --allow-file=none --allow-git=none --allow-remote=none --strict-ssl=true --registry=https://registry.npmjs.org/
 make lint
 make test
 make build

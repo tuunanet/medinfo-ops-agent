@@ -1,0 +1,34 @@
+{
+  "targetSha": "77e67ca4bc2a7e9b1fe655cf497f6ad67ee88106",
+  "mergeBaseSha": "48767d7bb898bc7e09d8baa30548c6d393b36caa",
+  "verifyCommand": "git diff --check origin/main...77e67ca",
+  "reviewerA": {
+    "name": "A",
+    "report": "## must-fix\n- `scripts/check-npm-acquisition-policy.py:142-152`: `parse_npmrc` does not follow npm/ini key parsing. npm unquotes quoted keys and strips inline `#`/`;` suffixes, but this parser retains them. Appending `\"min-release-age-exclude\"=source-fixture` or `\"cafile\"=/tmp/unreviewed.pem` to an otherwise-valid fixture lets this CLI pass while npm applies the forbidden exclusion or custom CA file. Normalize keys according to npmrc semantics and add isolated negative fixtures for these forms.\n\n## should-fix\nNone\n\n## consider\nNone\n\n## score\n72\n\n## verify result\nPassed: `git diff --check origin/main...77e67ca` produced no output.",
+    "parsed": {
+      "valid": true,
+      "score": 72,
+      "mustFixCount": 1,
+      "verifyStatus": "Passed: `git diff --check origin/main...77e67ca` produced no output."
+    }
+  },
+  "reviewerB": {
+    "name": "B",
+    "report": "## must-fix\nNone\n\n## should-fix\n- `tests/contract/test_npm_acquisition_policy_cli.py`: add an isolated `min-release-age-exclude[]=...` fixture. The implementation rejects array keys, but this P0 behavior lacks direct regression coverage.\n\n## consider\nNone\n\n## score\n97\n\n## verify result\nPassed: `git diff --check origin/main...77e67ca` produced no output.",
+    "parsed": {
+      "valid": true,
+      "score": 97,
+      "mustFixCount": 0,
+      "verifyStatus": "Passed: `git diff --check origin/main...77e67ca` produced no output."
+    }
+  },
+  "andGate": {
+    "pass": false,
+    "reason": "Reviewer A reported 1 must-fix finding(s)."
+  },
+  "cleanup": {
+    "worktreeA": "removed",
+    "worktreeB": "removed",
+    "tempDirectory": "removed"
+  }
+}

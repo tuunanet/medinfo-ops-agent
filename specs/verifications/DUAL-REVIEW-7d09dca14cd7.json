@@ -1,0 +1,34 @@
+{
+  "targetSha": "7d09dca14cd7eb205055bffbd71f9546f88f08a1",
+  "mergeBaseSha": "48767d7bb898bc7e09d8baa30548c6d393b36caa",
+  "verifyCommand": "git diff --check origin/main...7d09dca",
+  "reviewerA": {
+    "name": "A",
+    "report": "## must-fix\n\n- `scripts/check-npm-acquisition-policy.py:27,186-203` misses valid alternate sources: `gist:<id>` hosted-git shorthand and Windows drive paths such as `C:\\source` return permitted. Both violate the directory/git denial requirement. Add classification and isolated fixtures using otherwise-valid registry lock entries.\n- `scripts/check-npm-acquisition-policy.py:163-182` silently ignores malformed dependency fields and override nodes. For example, `optionalDependencies: []` or `overrides: {\"x\": []}` passes the CLI rather than failing closed. Validate field/map/value shapes and add negative tests.\n\n## should-fix\n\n- `tests/contract/test_npm_dependency_policy.py:58` checks exact versions only for `dependencies` and `devDependencies`; include `optionalDependencies` and `peerDependencies`.\n- Several `SOURCE_CASES` fixtures make both manifest and lockfile invalid, so lock validation can mask a regression in manifest-source validation. Isolate each manifest-source test with a valid official-registry SHA-512 lock record.\n\n## consider\n\n- Add a positive fixture for a valid declared workspace link; the current repository lockfile does not exercise the allowed-link branch.\n\n## score\n\n68\n\n## verify result\n\nPassed: `git diff --check origin/main...7d09dca` completed with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 68,
+      "mustFixCount": 2,
+      "verifyStatus": "Passed: `git diff --check origin/main...7d09dca` completed with no output."
+    }
+  },
+  "reviewerB": {
+    "name": "B",
+    "report": "## must-fix\n- `scripts/check-npm-acquisition-policy.py:186` does not classify npm’s `gist:<id>` hosted-Git syntax (and misses drive-letter paths such as `C:\\source`). Those sources can pass the manifest/override policy check when paired with an otherwise registry-only lockfile. Reject these forms and add fixtures that isolate manifest/override classification with a clean lockfile.\n- `scripts/check-npm-acquisition-policy.py:163-181` silently treats malformed dependency fields, non-string dependency specs, and non-string/non-object override leaves as absent. The source-policy gate must fail closed with errors for these values, rather than reporting success without validating the required dependency fields and recursive overrides. Add negative fixtures for each shape.\n\n## should-fix\nNone.\n\n## consider\nNone.\n\n## score\n70\n\n## verify result\nPassed: `git diff --check origin/main...7d09dca` exited 0 with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 70,
+      "mustFixCount": 2,
+      "verifyStatus": "Passed: `git diff --check origin/main...7d09dca` exited 0 with no output."
+    }
+  },
+  "andGate": {
+    "pass": false,
+    "reason": "Reviewer A reported 2 must-fix finding(s)."
+  },
+  "cleanup": {
+    "worktreeA": "removed",
+    "worktreeB": "removed",
+    "tempDirectory": "removed"
+  }
+}

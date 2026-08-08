@@ -40,8 +40,20 @@ class PreflightCommandContractTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("uv lock --check", commands)
         self.assertIn(
-            "npm ci --ignore-scripts --dry-run --no-audit --no-fund",
+            "uv run --locked python scripts/check-npm-acquisition-policy.py",
             commands,
+        )
+        self.assertIn(
+            "npm ci --ignore-scripts --dry-run --no-audit --no-fund --min-release-age=30 --allow-directory=none --allow-file=none --allow-git=none --allow-remote=none --strict-ssl=true --registry=https://registry.npmjs.org/",
+            commands,
+        )
+        self.assertLess(
+            commands.index(
+                "uv run --locked python scripts/check-npm-acquisition-policy.py"
+            ),
+            commands.index(
+                "npm ci --ignore-scripts --dry-run --no-audit --no-fund --min-release-age=30 --allow-directory=none --allow-file=none --allow-git=none --allow-remote=none --strict-ssl=true --registry=https://registry.npmjs.org/",
+            ),
         )
         self.assertLess(commands.index("make lint"), commands.index("make test"))
         self.assertLess(commands.index("make test"), commands.index("make build"))

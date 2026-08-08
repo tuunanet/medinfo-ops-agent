@@ -1,0 +1,68 @@
+story_id: e08s01
+verified_at: "2026-08-08T10:32:10Z"
+verifier: verify-work --cli
+risk: P0
+phases:
+  smoke:
+    passed: true
+    mode: cli
+    command: "npm config get min-release-age --location=project"
+    actual: "30"
+  build:
+    passed: true
+    command: "make preflight"
+    actual: "Next.js production build completed."
+  typecheck:
+    passed: true
+    command: "make preflight"
+    actual: "Next.js TypeScript check completed."
+  lint:
+    passed: true
+    command: "make preflight"
+    actual: "Ruff and ESLint completed."
+  tests:
+    passed: true
+    command: "uv run --locked python -m unittest tests.contract.test_npm_dependency_policy tests.contract.test_npm_acquisition_policy_cli"
+    actual: "16 P0 policy test methods passed, including a valid source-lock fixture without .npmrc, native npm directory denial, SCP Git, root or workspace shrinkwrap, missing or non-link workspace records, forged workspace-target links, explicit-null links, malformed SRI, and malformed source structures."
+  security:
+    passed: true
+    report: specs/security/REVIEW.md
+    actual: "No finding at confidence 8/10 or higher blocks verification."
+  blind_spot_check:
+    status: not_run
+    reason: "scripts/check-blind-spots.sh is absent; logged in BUG-2026-08-07T0118-plan-consistency-gates."
+  completeness_check:
+    status: not_run
+    reason: "scripts/lib/completeness-critic.sh is absent; logged in BUG-2026-08-07T0118-plan-consistency-gates."
+  nfr:
+    passed: true
+    report: specs/verifications/NFR-e08s01.json
+terminal_verdict:
+  command: "make preflight"
+  exit_code: 0
+  captured_at: "2026-08-08T10:32:10Z"
+  output_file: specs/verifications/e08s01-preflight.txt
+  note: "Single contiguous run; the captured output ends with Preflight complete."
+manual:
+  steps:
+    - step: "Read the effective project release-age setting."
+      expected: "30"
+      actual: "30"
+      passed: true
+    - step: "Run the source-policy gate against the checked-in npm configuration, manifests, and lockfile."
+      expected: "Only exact declared workspace links, npm-registry third-party entries, and SHA-512 integrity are accepted."
+      actual: "npm acquisition policy passed before the explicitly hardened npm ci command."
+      passed: true
+    - step: "Perform a frozen no-script npm ci dry run with the 30-day hold."
+      expected: "The locked tree is unchanged."
+      actual: "npm reported up to date and exited 0."
+      passed: true
+    - step: "Run the full repository gate."
+      expected: "Preflight completes after lock, lint, test, and build checks."
+      actual: "Preflight complete: runtime, locks, lint, tests, and build passed."
+      passed: true
+gaps:
+  closed: true
+  unavailable_lifecycle_gates:
+    status: logged
+    bug_id: BUG-2026-08-07T0118-plan-consistency-gates

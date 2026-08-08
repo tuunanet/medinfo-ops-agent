@@ -1,0 +1,18 @@
+id: e08
+title: Npm Dependency Maturity and Acquisition Controls
+scope_id: IS-08
+target_release: v0.1
+wsjf: 9.3
+total_bcps: 3
+status: done
+outcome: A developer can reproduce the verified local JavaScript toolchain without resolving newly published packages or executing dependency lifecycle scripts.
+stories:
+  - id: e08s01
+    title: Hold npm resolutions for 30 days and freeze acquisition
+    value: A developer avoids newly released npm packages and unreviewed install-time code when setting up or verifying the local workspace.
+    bcps: 3
+    status: done
+    delta: ADDED
+    depends_on: [e01s01]
+    spec: e08s01-hold-npm-resolutions.md
+    tasks: e08s01-tasks.yaml

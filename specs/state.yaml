@@ -1,11 +1,11 @@
 workflow_mode: solo-git
-active_flow: release_branch
-active_epic_id: e01
-active_story_id: e01s01
+active_flow: review
+active_epic_id: e08
+active_story_id: e08s01
 git:
-  branch: feat/e01s01-local-workspace
-  worktree: ../medinfo-e01s01
-  head: e4fca64
+  branch: feat/e08s01-dependency-supply-chain
+  worktree: ../medinfo-e08s01-dependency-supply-chain
+  head: 3988141
 active_decisions:
 - decision_id: solo-git-workflow
   decision: Use the complete solo-local story lifecycle without mandatory pull requests.
@@ -53,6 +53,10 @@ active_decisions:
   rationale: e01s01t01 owns the initial root command harness; all later gates must
     use make preflight.
   artifact: specs/verifications/e01s01-bootstrap-baseline.md
+- decision_id: npm-dependency-maturity
+  decision: Require a rolling 30-day minimum npm release age with exact direct dependency specifications, a committed lockfile, no dependency lifecycle scripts, and registry-only acquisition.
+  rationale: Reduce immediate exposure to newly published or newly compromised npm releases after the Shai-Hulud supply-chain incident while preserving the verified local stack.
+  artifact: specs/epics/e08-npm-dependency-maturity/e08s01-hold-npm-resolutions.md
 environment:
   python: 3.14.6
   node: 24.18.1
@@ -61,21 +65,20 @@ environment:
   podman: 5.7.0
   podman_rootless: true
 release:
-  decision: release
-  squash_message: 'feat(workspace): add executable local reviewer workspace'
-  semantic_effect: minor
+  decision: pending
+  story_id: e08s01
   preflight: passed
   coverage: passed
   security: passed
-  traceability: passed
+  traceability: not_run
   ci_verified: not_run
   ci_reason: No CI workflow is configured in this repository.
 handoff:
-  next_skill: survey-context
-  reason: e01s01 release gates passed. Resume from main after the guarded landing.
+  next_skill: request-review
+  reason: The simplified gate rejects link fields on declared workspace target records and requires exactly one true node link per declared workspace.
   last_terminal_state: success
 metrics:
-  story_start: 2026-08-02 14:44:09+00:00
+  story_start: 2026-08-07T01:45:40Z
   skill_timings:
     plan-work:
       calls: 2

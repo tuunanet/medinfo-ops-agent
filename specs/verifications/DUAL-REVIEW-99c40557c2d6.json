@@ -1,0 +1,34 @@
+{
+  "targetSha": "99c40557c2d66d86c01ed26adbd7057644bbecda",
+  "mergeBaseSha": "48767d7bb898bc7e09d8baa30548c6d393b36caa",
+  "verifyCommand": "git diff --check origin/main...99c4055",
+  "reviewerA": {
+    "name": "A",
+    "report": "## must-fix\n- `scripts/check-npm-acquisition-policy.py:169-171` silently accepts explicitly present dependency fields set to JSON `null`. A valid fixture with `\"dependencies\": null` and an otherwise valid registry lock exits successfully, despite the required fail-closed object shape. Reject `null` when the field is present; add isolated null fixtures.\n- `scripts/check-npm-acquisition-policy.py:221` misses drive-relative Windows paths such as `C:source`: its slice is `:s`, so the source is allowed. This is a Windows local-directory form and violates the required Windows-path denial. Add a `C:source` fixture with a valid lock.\n- Lock validation is not fail-closed for malformed integrity/link shapes: `link: \"true\"` is accepted as a workspace link at `:263`, and `integrity: \"sha512-\"` is accepted at `:277`. Require `link is True` and validate a nonempty valid SHA-512 SRI digest; add negative fixtures.\n\n## should-fix\nNone\n\n## consider\nNone\n\n## score\n58\n\n## verify result\nPassed: `git diff --check origin/main...99c4055` completed with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 58,
+      "mustFixCount": 3,
+      "verifyStatus": "Passed: `git diff --check origin/main...99c4055` completed with no output."
+    }
+  },
+  "reviewerB": {
+    "name": "B",
+    "report": "## must-fix\n- `min-release-age-exclude=next` bypasses the 30-day hold. The validator does not reject this non-array npm config form, tests only check `min-release-age-exclude[]`, and Preflight’s `--min-release-age=30` does not clear exclusions. Reject all exclusion-key forms and test them.\n- `npm-shrinkwrap.json` is ignored by the validator, although npm prefers it over `package-lock.json` for `npm ci`. Adding a shrinkwrap with an alternate graph/source leaves the CLI checking only the benign package lock. Reject a root shrinkwrap or validate the effective lockfile; add coverage.\n- Explicit `null` dependency fields pass validation: `manifest_specifications()` treats both absent and present-`null` fields as `None` and skips them. A valid fixture with `\"optionalDependencies\": null` exits successfully. Check field presence separately and reject null/non-object values.\n- Lock validation accepts malformed trusted fields: `integrity: \"sha512-\"` passes the prefix check, and a declared workspace link with `\"link\": \"true\"` passes truthiness checking. Require a valid SHA-512 SRI digest and `link is True`; add negative fixtures.\n\n## should-fix\nNone\n\n## consider\nNone\n\n## score\n52\n\n## verify result\nPassed — `git diff --check origin/main...99c4055` completed with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 52,
+      "mustFixCount": 4,
+      "verifyStatus": "Passed — `git diff --check origin/main...99c4055` completed with no output."
+    }
+  },
+  "andGate": {
+    "pass": false,
+    "reason": "Reviewer A reported 3 must-fix finding(s)."
+  },
+  "cleanup": {
+    "worktreeA": "removed",
+    "worktreeB": "removed",
+    "tempDirectory": "removed"
+  }
+}

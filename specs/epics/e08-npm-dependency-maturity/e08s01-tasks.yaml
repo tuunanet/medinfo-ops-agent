@@ -1,0 +1,41 @@
+story_id: e08s01
+title: Hold npm resolutions for 30 days and freeze acquisition
+status: passing
+bcps: 3
+risk: P0
+security: high
+tasks:
+  - id: e08s01t01
+    description: Add deterministic contract coverage for the 30-day npm release-age hold, every declared workspace's exact dependencies, integrity-bearing v3 lock entries, real npm directory denial, and matching source-policy bypass fixtures.
+    verify: "uv run --locked python -m unittest tests.contract.test_npm_dependency_policy tests.contract.test_npm_acquisition_policy_cli"
+    risk: P0
+    security: high
+    status: passing
+    allure:
+      severity: critical
+      categories:
+        - Dependency Supply Chain
+        - Security Review
+  - id: e08s01t02
+    description: Add the project-owned npm acquisition policy and fail-closed source-policy gate, then align direct workspace dependency specifications with the committed lockfile without changing resolved package versions.
+    verify: "uv run --locked python -m unittest tests.contract.test_npm_dependency_policy tests.contract.test_npm_acquisition_policy_cli"
+    risk: P0
+    security: high
+    status: passing
+    allure:
+      severity: critical
+      categories:
+        - Dependency Supply Chain
+        - Lockfile Integrity
+  - id: e08s01t03
+    description: Enforce the npm policy in the root preflight gate and record the maturity decision without introducing a new dependency or a new security finding in affected paths.
+    verify: "make preflight"
+    risk: P0
+    security: high
+    status: passing
+    allure:
+      severity: critical
+      categories:
+        - Dependency Supply Chain
+        - Preflight
+        - Security Review

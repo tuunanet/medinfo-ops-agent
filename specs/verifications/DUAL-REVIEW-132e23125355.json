@@ -1,0 +1,34 @@
+{
+  "targetSha": "132e23125355a2970401b8a0bdea1d13126fa54f",
+  "mergeBaseSha": "48767d7bb898bc7e09d8baa30548c6d393b36caa",
+  "verifyCommand": "git diff --check origin/main...132e231",
+  "reviewerA": {
+    "name": "A",
+    "report": "## must-fix\n\n1. `source_type_for()` accepts valid non-`git@` SCP-style Git sources such as `deploy@example.invalid:repo.git` when no `/` appears. It only recognizes `git@` or falls back to `/` detection, so the deterministic gate passes this alternate Git source. Reject generic SCP Git syntax and add an isolated fixture.\n\n2. `lockfile_package_errors()` treats explicit `\"link\": null` as absent because it uses `package.get(\"link\")`. A third-party record with a valid registry URL, digest, and `link: null` passes, despite the required exact-Boolean link rule. Check field presence, reject every present non-`true` link value (including null), and add coverage.\n\n## should-fix\n\n- The standalone policy CLI does not require `min-release-age=30`; it relies on a later contract test and the explicit Preflight flag. Add it to `REQUIRED_SETTINGS` so the pre-npm policy gate itself rejects a weakened maturity configuration.\n\n## consider\n\nNone.\n\n## score\n\n65\n\n## verify result\n\nPassed — `git diff --check origin/main...132e231` completed with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 65,
+      "mustFixCount": 2,
+      "verifyStatus": "Passed — `git diff --check origin/main...132e231` completed with no output."
+    }
+  },
+  "reviewerB": {
+    "name": "B",
+    "report": "## must-fix\n- `scripts/check-npm-acquisition-policy.py:106-138` permits `.npmrc` `ca`/`cafile` settings. Those retain `strict-ssl=true` while trusting an attacker-controlled CA, allowing interception of the nominal npmjs HTTPS endpoint; the attacker can supply a matching SHA-512 SRI in a modified lockfile. Preflight’s explicit `--strict-ssl`/`--registry` flags do not clear those settings. Reject custom trust-root settings (including array forms) and add rejection fixtures.\n- `scripts/check-npm-acquisition-policy.py:61-64` rejects only a root `npm-shrinkwrap.json`. A shrinkwrap committed in `apps/web/` is accepted and can govern installation when that workspace is used as the npm project/prefix, bypassing the reviewed root lockfile. Reject shrinkwrap files in every declared workspace and test that case.\n\n## should-fix\n- Include `min-release-age=30` in `REQUIRED_SETTINGS` and add a CLI fixture for its absence/weakening. The explicit Preflight argument and separate contract currently compensate, but the policy CLI itself does not reject a missing 30-day project hold before npm runs.\n\n## consider\n- Add malformed non-empty/non-base64 and wrong-length SHA-512 SRI fixtures, not only an empty digest.\n\n## score\n55\n\n## verify result\nPassed — `git diff --check origin/main...132e231` completed with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 55,
+      "mustFixCount": 2,
+      "verifyStatus": "Passed — `git diff --check origin/main...132e231` completed with no output."
+    }
+  },
+  "andGate": {
+    "pass": false,
+    "reason": "Reviewer A reported 2 must-fix finding(s)."
+  },
+  "cleanup": {
+    "worktreeA": "removed",
+    "worktreeB": "removed",
+    "tempDirectory": "removed"
+  }
+}

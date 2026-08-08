@@ -1,0 +1,76 @@
+Runtime contract OK: Python 3.14.6, Node.js 24.18.1, npm 11.16.0, rootless Podman 5.7.0
+Resolved 22 packages in 1ms
+npm acquisition policy passed
+
+up to date in 612ms
+make[1]: Entering directory '/home/tuunanet/git/tuunanet/newpage/medinfo-e08s01-dependency-supply-chain'
+All checks passed!
+59 files already formatted
+
+> medinfo-ops-agent@0.0.0 lint
+> eslint . --max-warnings=0
+
+make[1]: Leaving directory '/home/tuunanet/git/tuunanet/newpage/medinfo-e08s01-dependency-supply-chain'
+make[1]: Entering directory '/home/tuunanet/git/tuunanet/newpage/medinfo-e08s01-dependency-supply-chain'
+................................
+----------------------------------------------------------------------
+Ran 32 tests in 3.972s
+
+OK
+
+> medinfo-ops-agent@0.0.0 test
+> npm run test:unit && npm run test:e2e
+
+
+> medinfo-ops-agent@0.0.0 test:unit
+> node --test
+
+✔ API responses map to truthful reviewer readiness states (1.817703ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 165.444694
+
+> medinfo-ops-agent@0.0.0 test:e2e
+> playwright test
+
+
+Running 5 tests using 1 worker
+
+  ✓  1 [chromium] › apps/web/e2e/readiness.spec.ts:5:1 › healthy workspace shows truthful ready states (663ms)
+  ✓  2 [chromium] › apps/web/e2e/readiness.spec.ts:30:1 › API failure never appears ready (583ms)
+  ✓  3 [chromium] › apps/web/e2e/readiness.spec.ts:64:1 › readiness status is announced without color dependence (587ms)
+  ✓  4 [chromium] › apps/web/e2e/readiness.spec.ts:87:3 › database unavailable remains distinct (597ms)
+  ✓  5 [chromium] › apps/web/e2e/readiness.spec.ts:87:3 › pgvector unavailable remains distinct (651ms)
+
+  5 passed (6.6s)
+make[1]: Leaving directory '/home/tuunanet/git/tuunanet/newpage/medinfo-e08s01-dependency-supply-chain'
+make[1]: Entering directory '/home/tuunanet/git/tuunanet/newpage/medinfo-e08s01-dependency-supply-chain'
+
+> @medinfo/web@0.0.0 build
+> next build
+
+▲ Next.js 16.2.12 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1941ms
+  Running TypeScript ...
+  Finished TypeScript in 2.2s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/3) ...
+✓ Generating static pages using 4 workers (3/3) in 418ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+└ ○ /_not-found
+
+
+○  (Static)  prerendered as static content
+
+make[1]: Leaving directory '/home/tuunanet/git/tuunanet/newpage/medinfo-e08s01-dependency-supply-chain'
+Preflight complete: runtime, locks, lint, tests, and build passed

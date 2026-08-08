@@ -1,0 +1,34 @@
+{
+  "targetSha": "212f7a7adbf8293481003fcf1ca0b2e67fcf34bc",
+  "mergeBaseSha": "48767d7bb898bc7e09d8baa30548c6d393b36caa",
+  "verifyCommand": "git diff --check origin/main...212f7a7",
+  "reviewerA": {
+    "name": "A",
+    "report": "## must-fix\nNone\n\n## should-fix\nNone\n\n## consider\nNone\n\n## score\n100\n\n## verify result\nPassed — `git diff --check origin/main...212f7a7` completed with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 100,
+      "mustFixCount": 0,
+      "verifyStatus": "Passed — `git diff --check origin/main...212f7a7` completed with no output."
+    }
+  },
+  "reviewerB": {
+    "name": "B",
+    "report": "## must-fix\nNone\n\n## should-fix\nNone\n\n## consider\nNone\n\n## score\n100\n\n## verify result\nPassed: `git diff --check origin/main...212f7a7` produced no errors.",
+    "parsed": {
+      "valid": true,
+      "score": 100,
+      "mustFixCount": 0,
+      "verifyStatus": "Passed: `git diff --check origin/main...212f7a7` produced no errors."
+    }
+  },
+  "andGate": {
+    "pass": true,
+    "reason": "Both reviewers reported zero must-fix findings and scores of at least 94."
+  },
+  "cleanup": {
+    "worktreeA": "removed",
+    "worktreeB": "removed",
+    "tempDirectory": "removed"
+  }
+}

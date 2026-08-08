@@ -1,0 +1,34 @@
+{
+  "targetSha": "5ff75379cf96d83fc01f3c845e4b964784c8d140",
+  "mergeBaseSha": "48767d7bb898bc7e09d8baa30548c6d393b36caa",
+  "verifyCommand": "git diff --check origin/main...5ff7537",
+  "reviewerA": {
+    "name": "A",
+    "report": "## must-fix\nNone\n\n## should-fix\nNone\n\n## consider\nNone\n\n## score\n98\n\n## verify result\nPassed — `git diff --check origin/main...5ff7537` completed with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 98,
+      "mustFixCount": 0,
+      "verifyStatus": "Passed — `git diff --check origin/main...5ff7537` completed with no output."
+    }
+  },
+  "reviewerB": {
+    "name": "B",
+    "report": "## must-fix\n- `scripts/check-npm-acquisition-policy.py:224-256` does not require a declared workspace’s `node_modules/<workspace-name>` record to be an exact `link: true` link. Replacing that record with a valid SHA-512, npmjs-resolved normal package (or omitting it) passes the validator because the link logic only runs when `link` is present. Require one exact link per declared workspace and add negative fixtures for missing/non-link workspace records.\n\n## should-fix\nNone\n\n## consider\nNone\n\n## score\n87\n\n## verify result\nPassed: `git diff --check origin/main...5ff7537` completed with no output.",
+    "parsed": {
+      "valid": true,
+      "score": 87,
+      "mustFixCount": 1,
+      "verifyStatus": "Passed: `git diff --check origin/main...5ff7537` completed with no output."
+    }
+  },
+  "andGate": {
+    "pass": false,
+    "reason": "Reviewer B reported 1 must-fix finding(s)."
+  },
+  "cleanup": {
+    "worktreeA": "removed",
+    "worktreeB": "removed",
+    "tempDirectory": "removed"
+  }
+}

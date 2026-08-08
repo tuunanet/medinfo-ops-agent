@@ -1,0 +1,25 @@
+{
+  "story_id": "e08s01",
+  "verified_at": "2026-08-08T10:32:10Z",
+  "verifier": "verify-work --cli",
+  "verdict": "PASS",
+  "dimensions": {
+    "performance": {
+      "status": "pass",
+      "measurement": "policy_contract_duration_ms=2549",
+      "threshold": "No numeric threshold is specified for this configuration-only story."
+    },
+    "reliability": {
+      "status": "pass",
+      "evidence": "The manifest-and-lockfile source-policy gate with mandatory node link and non-link workspace-target checks, explicitly hardened frozen npm ci dry run, and complete make preflight all exited 0."
+    },
+    "operability": {
+      "status": "pass",
+      "evidence": "The source-policy CLI passed for the repository without reading .npmrc, rejected deterministic source and lock bypass fixtures including SCP Git, workspace shrinkwrap, explicit-null links, malformed SRI, and malformed shapes, and real npm rejected a temporary directory dependency with EALLOWDIRECTORY."
+    }
+  },
+  "limitations": [
+    "The deterministic contract suite does not query dynamic registry publication timestamps.",
+    "The release-age hold reduces exposure to fresh releases but does not establish that an older package is safe."
+  ]
+}

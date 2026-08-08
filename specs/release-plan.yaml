@@ -22,6 +22,14 @@ epics:
     bcps: 6
     capsule_dir: epics/e01-executable-local-foundation
     file: epics/e01-executable-local-foundation/epic.yaml
+  - id: e08
+    title: Npm Dependency Maturity and Acquisition Controls
+    target_release: v0.1
+    wsjf: 9.3
+    wsjf_inputs: { business_value: 8, time_criticality: 10, risk_reduction: 10, job_size: 3, security_boost: 0 }
+    bcps: 3
+    capsule_dir: epics/e08-npm-dependency-maturity
+    file: epics/e08-npm-dependency-maturity/epic.yaml
   - id: e02
     title: Synthetic Intake and Privacy
     target_release: v0.1
